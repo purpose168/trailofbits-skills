@@ -6,13 +6,13 @@
   },
   "metadata": {
     "version": "1.0.0",
-    "description": "Claude Code plugins from Trail of Bits for enhanced AI-assisted security analysis and development"
+    "description": "来自 Trail of Bits 的 Claude Code 插件，用于增强 AI 辅助安全分析和开发"
   },
   "plugins": [
     {
       "name": "ask-questions-if-underspecified",
       "version": "1.0.0",
-      "description": "Clarify requirements before implementing. When doubting, ask questions.",
+      "description": "在实现前澄清需求。有疑问时，提出问题。",
       "author": {
         "name": "Kevin Valerio",
         "email": "opensource@trailofbits.com",
@@ -22,7 +22,7 @@
     },
     {
       "name": "audit-context-building",
-      "description": "Build deep architectural context through ultra-granular code analysis before vulnerability hunting",
+      "description": "在进行漏洞挖掘之前，通过超细粒度代码分析构建深层架构上下文",
       "version": "1.0.0",
       "author": {
         "name": "Omar Inuwa"
@@ -32,7 +32,7 @@
     {
       "name": "building-secure-contracts",
       "version": "1.0.0",
-      "description": "Comprehensive smart contract security toolkit based on Trail of Bits' Building Secure Contracts framework. Includes vulnerability scanners for 6 blockchains and 5 development guideline assistants.",
+      "description": "基于 Trail of Bits 安全合约构建框架的综合智能合约安全工具包。包含针对 6 条区块链的漏洞扫描器和 5 个开发指南助手。",
       "author": {
         "name": "Omar Inuwa"
       },
@@ -41,7 +41,7 @@
     {
       "name": "burpsuite-project-parser",
       "version": "1.0.0",
-      "description": "Search and extract data from Burp Suite project files (.burp) for use in Claude",
+      "description": "从 Burp Suite 项目文件 (.burp) 中搜索和提取数据，用于 Claude",
       "author": {
         "name": "Will Vandevanter"
       },
@@ -50,7 +50,7 @@
     {
       "name": "constant-time-analysis",
       "version": "0.1.0",
-      "description": "Detect compiler-induced timing side-channels in cryptographic code",
+      "description": "检测加密代码中编译器引起的时间侧信道攻击",
       "author": {
         "name": "Scott Arciszewski",
         "email": "opensource@trailofbits.com"
@@ -60,7 +60,7 @@
     {
       "name": "culture-index",
       "version": "1.0.0",
-      "description": "Interprets Culture Index survey results for individuals and teams",
+      "description": "解释个人和团队的 Culture Index 调查结果",
       "author": {
         "name": "Dan Guido"
       },
@@ -68,7 +68,7 @@
     },
     {
       "name": "differential-review",
-      "description": "Security-focused differential review of code changes with git history analysis and blast radius estimation",
+      "description": "对代码变更进行安全重点的差异审查，包含 git 历史分析和爆炸半径估计",
       "version": "1.0.0",
       "author": {
         "name": "Omar Inuwa"
@@ -78,7 +78,7 @@
     {
       "name": "firebase-apk-scanner",
       "version": "2.1.0",
-      "description": "Scan Android APKs for Firebase security misconfigurations including open databases, storage buckets, authentication issues, and exposed cloud functions. For authorized security research only.",
+      "description": "扫描 Android APK 中的 Firebase 安全配置错误，包括开放的数据库、存储桶、身份验证问题和暴露的云函数。仅限授权的安全研究使用。",
       "author": {
         "name": "Nick Sellier"
       },
@@ -86,7 +86,7 @@
     },
     {
       "name": "fix-review",
-      "description": "Verify fix commits address audit findings without introducing bugs",
+      "description": "验证修复提交是否解决了审计发现，且没有引入新错误",
       "version": "0.1.0",
       "author": {
         "name": "Trail of Bits",
@@ -96,7 +96,7 @@
     },
     {
       "name": "dwarf-expert",
-      "description": "Interact with and understand the DWARF debugging format",
+      "description": "与 DWARF 调试格式交互并理解它",
       "version": "1.0.0",
       "author": {
         "name": "Evan Hellman",
@@ -107,7 +107,7 @@
     {
       "name": "entry-point-analyzer",
       "version": "1.0.0",
-      "description": "Analyzes smart contract codebases to identify state-changing entry points for security auditing. Detects externally callable functions that modify state, categorizes them by access level, and generates structured audit reports.",
+      "description": "分析智能合约代码库以识别用于安全审计的会改变状态的入口点。检测外部可调用的修改状态的函数，按访问级别分类，并生成结构化审计报告。",
       "author": {
         "name": "Nicolas Donboly",
         "email": "opensource@trailofbits.com",
@@ -117,7 +117,7 @@
     },
     {
       "name": "property-based-testing",
-      "description": "Property-based testing guidance for multiple languages and smart contracts",
+      "description": "针对多种语言和智能合约的属性测试指南",
       "version": "1.0.0",
       "author": {
         "name": "Henrik Brodin",
@@ -128,7 +128,7 @@
     {
       "name": "semgrep-rule-creator",
       "version": "1.0.0",
-      "description": "Create custom Semgrep rules for detecting bug patterns and security vulnerabilities",
+      "description": "创建自定义 Semgrep 规则来检测错误模式和安全漏洞",
       "author": {
         "name": "Maciej Domanski"
       },
@@ -137,7 +137,7 @@
     {
       "name": "semgrep-rule-variant-creator",
       "version": "1.0.0",
-      "description": "Creates language variants of existing Semgrep rules with proper applicability analysis and test-driven validation",
+      "description": "创建现有 Semgrep 规则的语言变体，包含适当的适用性分析和测试驱动验证",
       "author": {
         "name": "Maciej Domanski",
         "email": "opensource@trailofbits.com"
@@ -147,7 +147,7 @@
     {
       "name": "sharp-edges",
       "version": "1.0.0",
-      "description": "Identify error-prone APIs, dangerous configurations, and footgun designs that enable security mistakes",
+      "description": "识别易出错的 API、危险配置和"脚枪"设计，这些会导致安全错误",
       "author": {
         "name": "Scott Arciszewski",
         "email": "opensource@trailofbits.com",
@@ -158,7 +158,7 @@
     {
       "name": "static-analysis",
       "version": "1.0.1",
-      "description": "Static analysis toolkit with CodeQL, Semgrep, and SARIF parsing for security vulnerability detection",
+      "description": "静态分析工具包，包含 CodeQL、Semgrep 和 SARIF 解析，用于安全漏洞检测",
       "author": {
         "name": "Axel Mierczuk"
       },
@@ -166,7 +166,7 @@
     },
     {
       "name": "spec-to-code-compliance",
-      "description": "Specification-to-code compliance checker for blockchain audits with evidence-based alignment analysis",
+      "description": "区块链审计的规范到代码合规性检查器，包含基于证据的对齐分析",
       "version": "1.0.0",
       "author": {
         "name": "Omar Inuwa"
@@ -176,7 +176,7 @@
     {
       "name": "testing-handbook-skills",
       "version": "1.0.0",
-      "description": "Skills from the Trail of Bits Application Security Testing Handbook (appsec.guide)",
+      "description": "来自 Trail of Bits 应用安全测试手册 (appsec.guide) 的技能",
       "author": {
         "name": "Paweł Płatek"
       },
@@ -185,7 +185,7 @@
     {
       "name": "variant-analysis",
       "version": "1.0.0",
-      "description": "Find similar vulnerabilities and bugs across codebases using pattern-based analysis",
+      "description": "使用基于模式分析在代码库中查找类似的漏洞和错误",
       "author": {
         "name": "Axel Mierczuk"
       },
@@ -194,7 +194,7 @@
     {
       "name": "modern-python",
       "version": "1.2.0",
-      "description": "Modern Python best practices. Use when creating new Python projects, and writing Python scripts, or migrating existing projects from legacy tools.",
+      "description": "现代 Python 最佳实践。在创建新的 Python 项目、编写 Python 脚本或从传统工具迁移现有项目时使用。",
       "author": {
         "name": "William Tan",
         "email": "opensource@trailofbits.com",

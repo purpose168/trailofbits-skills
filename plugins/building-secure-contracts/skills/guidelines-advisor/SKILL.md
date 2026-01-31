@@ -1,252 +1,257 @@
 ---
 name: guidelines-advisor
-description: Comprehensive smart contract development advisor based on Trail of Bits' best practices. Analyzes codebase to generate documentation/specifications, review architecture, check upgradeability patterns, assess implementation quality, identify pitfalls, review dependencies, and evaluate testing. Provides actionable recommendations. (project, gitignored)
+description: 基于 Trail of Bits 最佳实践的综合智能合约开发顾问。分析代码库以生成文档/规范、审查架构、检查可升级性模式、评估实现质量、识别陷阱、审查依赖项并评估测试。提供可操作的建议。（项目，gitignored）
 ---
 
-# Guidelines Advisor
+# 指南顾问
 
-## Purpose
+## 目的
 
-I will systematically analyze your codebase and provide comprehensive guidance based on Trail of Bits' development guidelines. I'll help you:
+我将系统地分析您的代码库，并根据 Trail of Bits 的开发指南提供综合指导。我将帮助您：
 
-1. **Generate documentation and specifications** (plain English descriptions, architectural diagrams, code documentation)
-2. **Optimize on-chain/off-chain architecture** (only if applicable)
-3. **Review upgradeability patterns** (if your project has upgrades)
-4. **Check delegatecall/proxy implementations** (if present)
-5. **Assess implementation quality** (functions, inheritance, events)
-6. **Identify common pitfalls**
-7. **Review dependencies**
-8. **Evaluate test suite and suggest improvements**
+1. **生成文档和规范**（通俗英语描述、架构图、代码文档）
+2. **优化链上/链下架构**（仅如果适用）
+3. **审查可升级性模式**（如果您的项目有升级）
+4. **检查 delegatecall/代理实现**（如果存在）
+5. **评估实现质量**（函数、继承、事件）
+6. **识别常见陷阱**
+7. **审查依赖项**
+8. **评估测试套件并建议改进**
 
-**Framework**: Building Secure Contracts - Development Guidelines
-
----
-
-## How This Works
-
-### Phase 1: Discovery & Context
-I'll explore the codebase to understand:
-- Project structure and platform
-- Contract/module files and their purposes
-- Existing documentation
-- Architecture patterns (proxies, upgrades, etc.)
-- Testing setup
-- Dependencies
-
-### Phase 2: Documentation Generation
-I'll help create:
-- Plain English system description
-- Architectural diagrams (using Slither printers for Solidity)
-- Code documentation recommendations (NatSpec for Solidity)
-
-### Phase 3: Architecture Analysis
-I'll analyze:
-- On-chain vs off-chain component distribution (if applicable)
-- Upgradeability approach (if applicable)
-- Delegatecall proxy patterns (if present)
-
-### Phase 4: Implementation Review
-I'll assess:
-- Function composition and clarity
-- Inheritance structure
-- Event logging practices
-- Common pitfalls presence
-- Dependencies quality
-- Testing coverage and techniques
-
-### Phase 5: Recommendations
-I'll provide:
-- Prioritized improvement suggestions
-- Best practice guidance
-- Actionable next steps
+**框架**：构建安全合约 - 开发指南
 
 ---
 
-## Assessment Areas
+## 这如何工作
 
-I analyze 11 comprehensive areas covering all aspects of smart contract development. For detailed criteria, best practices, and specific checks, see [ASSESSMENT_AREAS.md](resources/ASSESSMENT_AREAS.md).
+### 第1阶段：发现和上下文
 
-### Quick Reference:
+我将探索代码库以了解：
+- 项目结构和平台
+- 合约/模块文件及其用途
+- 现有文档
+- 架构模式（代理、升级等）
+- 测试设置
+- 依赖项
 
-1. **Documentation & Specifications**
-   - Plain English system descriptions
-   - Architectural diagrams
-   - NatSpec completeness (Solidity)
-   - Documentation gaps identification
+### 第2阶段：文档生成
 
-2. **On-Chain vs Off-Chain Computation**
-   - Complexity analysis
-   - Gas optimization opportunities
-   - Verification vs computation patterns
+我将帮助创建：
+- 通俗英语系统描述
+- 架构图（对 Solidity 使用 Slither 打印机）
+- 代码文档建议（Solidity 的 NatSpec）
 
-3. **Upgradeability**
-   - Migration vs upgradeability trade-offs
-   - Data separation patterns
-   - Upgrade procedure documentation
+### 第3阶段：架构分析
 
-4. **Delegatecall Proxy Pattern**
-   - Storage layout consistency
-   - Initialization patterns
-   - Function shadowing risks
-   - Slither upgradeability checks
+我将分析：
+- 链上 vs 链下组件分布（如果适用）
+- 可升级性方法（如果适用）
+- Delegatecall 代理模式（如果存在）
 
-5. **Function Composition**
-   - Function size and clarity
-   - Logical grouping
-   - Modularity assessment
+### 第4阶段：实现审查
 
-6. **Inheritance**
-   - Hierarchy depth/width
-   - Diamond problem risks
-   - Inheritance visualization
+我将评估：
+- 函数组成和清晰度
+- 继承结构
+- 事件日志实践
+- 常见陷阱存在
+- 依赖项质量
+- 测试覆盖率和技术
 
-7. **Events**
-   - Critical operation coverage
-   - Event naming consistency
-   - Indexed parameters
+### 第5阶段：建议
 
-8. **Common Pitfalls**
-   - Reentrancy patterns
-   - Integer overflow/underflow
-   - Access control issues
-   - Platform-specific vulnerabilities
-
-9. **Dependencies**
-   - Library quality assessment
-   - Version management
-   - Dependency manager usage
-   - Copied code detection
-
-10. **Testing & Verification**
-    - Coverage analysis
-    - Fuzzing techniques
-    - Formal verification
-    - CI/CD integration
-
-11. **Platform-Specific Guidance**
-    - Solidity version recommendations
-    - Compiler warning checks
-    - Inline assembly warnings
-    - Platform-specific tools
-
-For complete details on each area including what I'll check, analyze, and recommend, see [ASSESSMENT_AREAS.md](resources/ASSESSMENT_AREAS.md).
+我将提供：
+- 优先改进建议
+- 最佳实践指导
+- 可操作的下一步
 
 ---
 
-## Example Output
+## 评估领域
 
-When the analysis is complete, you'll receive comprehensive guidance covering:
+我分析了涵盖智能合约开发各方面的 11 个综合领域。详细标准、最佳实践和具体检查，请参见 [ASSESSMENT_AREAS.md](resources/ASSESSMENT_AREAS.md)。
 
-- System documentation with plain English descriptions
-- Architectural diagrams and documentation gaps
-- Architecture analysis (on-chain/off-chain, upgradeability, proxies)
-- Implementation review (functions, inheritance, events, pitfalls)
-- Dependencies and testing evaluation
-- Prioritized recommendations (CRITICAL, HIGH, MEDIUM, LOW)
-- Overall assessment and path to production
+### 快速参考：
 
-For a complete example analysis report, see [EXAMPLE_REPORT.md](resources/EXAMPLE_REPORT.md).
+1. **文档和规范**
+   - 通俗英语系统描述
+   - 架构图
+   - NatSpec 完整性（Solidity）
+   - 文档差距识别
 
----
+2. **链上 vs 链下计算**
+   - 复杂性分析
+   - 气体优化机会
+   - 验证 vs 计算模式
 
-## Deliverables
+3. **可升级性**
+   - 迁移 vs 可升级性权衡
+   - 数据分离模式
+   - 升级程序文档
 
-I provide four comprehensive deliverable categories:
+4. **Delegatecall 代理模式**
+   - 存储布局一致性
+   - 初始化模式
+   - 函数遮蔽风险
+   - Slither 可升级性检查
 
-### 1. System Documentation
-- Plain English descriptions
-- Architectural diagrams
-- Documentation gaps analysis
+5. **函数组成**
+   - 函数大小和清晰度
+   - 逻辑分组
+   - 模块化评估
 
-### 2. Architecture Analysis
-- On-chain/off-chain assessment
-- Upgradeability review
-- Proxy pattern security review
+6. **继承**
+   - 层次结构深度/宽度
+   - 菱形问题风险
+   - 继承可视化
 
-### 3. Implementation Review
-- Function composition analysis
-- Inheritance assessment
-- Events coverage
-- Pitfall identification
-- Dependencies evaluation
-- Testing analysis
+7. **事件**
+   - 关键操作覆盖
+   - 事件命名一致性
+   - 索引参数
 
-### 4. Prioritized Recommendations
-- CRITICAL (address immediately)
-- HIGH (address before deployment)
-- MEDIUM (address for production quality)
-- LOW (nice to have)
+8. **常见陷阱**
+   - 重入模式
+   - 整数溢出/下溢
+   - 访问控制问题
+   - 平台特定漏洞
 
-For detailed templates and examples of each deliverable, see [DELIVERABLES.md](resources/DELIVERABLES.md).
+9. **依赖项**
+   - 库质量评估
+   - 版本管理
+   - 依赖项管理器使用
+   - 复制代码检测
 
----
+10. **测试和验证**
+    - 覆盖率分析
+    - 模糊测试技术
+    - 形式验证
+    - CI/CD 集成
 
-## Assessment Process
+11. **平台特定指导**
+    - Solidity 版本建议
+    - 编译器警告检查
+    - 内联汇编警告
+    - 平台特定工具
 
-When invoked, I will:
-
-1. **Explore the codebase**
-   - Identify all contract/module files
-   - Find existing documentation
-   - Locate test files
-   - Check for proxies/upgrades
-   - Identify dependencies
-
-2. **Generate documentation**
-   - Create plain English system description
-   - Generate architectural diagrams (if tools available)
-   - Identify documentation gaps
-
-3. **Analyze architecture**
-   - Assess on-chain/off-chain distribution (if applicable)
-   - Review upgradeability approach (if applicable)
-   - Audit proxy patterns (if present)
-
-4. **Review implementation**
-   - Analyze functions, inheritance, events
-   - Check for common pitfalls
-   - Assess dependencies
-   - Evaluate testing
-
-5. **Provide recommendations**
-   - Present findings with file references
-   - Ask clarifying questions about design decisions
-   - Suggest prioritized improvements
-   - Offer actionable next steps
+每个领域的完整详情，包括我将检查、分析和推荐的内容，请参见 [ASSESSMENT_AREAS.md](resources/ASSESSMENT_AREAS.md)。
 
 ---
 
-## Rationalizations (Do Not Skip)
+## 示例输出
 
-| Rationalization | Why It's Wrong | Required Action |
-|-----------------|----------------|-----------------|
-| "System is simple, description covers everything" | Plain English descriptions miss security-critical details | Complete all 5 phases: documentation, architecture, implementation, dependencies, recommendations |
-| "No upgrades detected, skip upgradeability section" | Upgradeability can be implicit (ownable patterns, delegatecall) | Search for proxy patterns, delegatecall, storage collisions before declaring N/A |
-| "Not applicable" without verification | Premature scope reduction misses vulnerabilities | Verify with explicit codebase search before skipping any guideline section |
-| "Architecture is straightforward, no analysis needed" | Obvious architectures have subtle trust boundaries | Analyze on-chain/off-chain distribution, access control flow, external dependencies |
-| "Common pitfalls don't apply to this codebase" | Every codebase has common pitfalls | Systematically check all guideline pitfalls with grep/code search |
-| "Tests exist, testing guideline is satisfied" | Test existence ≠ test quality | Check coverage, property-based tests, integration tests, failure cases |
-| "I can provide generic best practices" | Generic advice isn't actionable | Provide project-specific findings with file:line references |
-| "User knows what to improve from findings" | Findings without prioritization = no action plan | Generate prioritized improvement roadmap with specific next steps |
+当分析完成时，您将获得涵盖以下内容的综合指导：
 
----
+- 带通俗英语描述的系统文档
+- 架构图和文档差距
+- 架构分析（链上/链下、可升级性、代理）
+- 实现审查（函数、继承、事件、陷阱）
+- 依赖项和测试评估
+- 优先建议（CRITICAL、HIGH、MEDIUM、LOW）
+- 整体评估和生产路径
 
-## Notes
-
-- I'll only analyze relevant sections (won't hallucinate about upgrades if not present)
-- I'll adapt to your platform (Solidity, Rust, Cairo, etc.)
-- I'll use available tools (Slither, etc.) but work without them if unavailable
-- I'll provide file references and line numbers for all findings
-- I'll ask questions about design decisions I can't infer from code
+有关完整的示例分析报告，请参见 [EXAMPLE_REPORT.md](resources/EXAMPLE_REPORT.md)。
 
 ---
 
-## Ready to Begin
+## 交付物
 
-**What I'll need**:
-- Access to your codebase
-- Context about your project goals
-- Any existing documentation or specifications
-- Information about deployment plans
+我提供四个综合交付物类别：
 
-Let's analyze your codebase and improve it using Trail of Bits' best practices!
+### 1. 系统文档
+- 通俗英语描述
+- 架构图
+- 文档差距分析
+
+### 2. 架构分析
+- 链上/链下评估
+- 可升级性审查
+- 代理模式安全审查
+
+### 3. 实现审查
+- 函数组成分析
+- 继承评估
+- 事件覆盖
+- 陷阱识别
+- 依赖项评估
+- 测试分析
+
+### 4. 优先建议
+- CRITICAL（立即解决）
+- HIGH（部署前解决）
+- MEDIUM（解决以达到生产质量）
+- LOW（最好有）
+
+每个交付物的详细模板和示例，请参见 [DELIVERABLES.md](resources/DELIVERABLES.md)。
+
+---
+
+## 评估过程
+
+调用时，我将：
+
+1. **探索代码库**
+   - 识别所有合约/模块文件
+   - 找到现有文档
+   - 找到测试文件
+   - 检查代理/升级
+   - 识别依赖项
+
+2. **生成文档**
+   - 创建通俗英语系统描述
+   - 生成架构图（如果工具可用）
+   - 识别文档差距
+
+3. **分析架构**
+   - 评估链上/链下分布（如果适用）
+   - 审查可升级性方法（如果适用）
+   - 审计代理模式（如果存在）
+
+4. **审查实现**
+   - 分析函数、继承、事件
+   - 检查常见陷阱
+   - 评估依赖项
+   - 评估测试
+
+5. **提供建议**
+   - 呈现带有文件引用的发现
+   - 询问关于设计决策的澄清问题
+   - 建议优先改进
+   - 提供可操作的下一步
+
+---
+
+## 合理化（不要跳过）
+
+| 合理化 | 为什么它是错误的 | 必需的操作 |
+|--------|------------------|------------|
+| "系统很简单，描述涵盖一切" | 通俗英语描述会遗漏安全关键细节 | 完成所有 5 个阶段：文档、架构、实现、依赖项、建议 |
+| "未检测到升级，跳过可升级性部分" | 可升级性可以是隐式的（ownable 模式、delegatecall） | 在声明 N/A 之前搜索代理模式、delegatecall、存储冲突 |
+| "未经验证不适用" | 过早的范围缩减会遗漏漏洞 | 在跳过任何指南部分之前用显式代码库搜索验证 |
+| "架构很简单，不需要分析" | 明显的架构有微妙的信任边界 | 分析链上/链下分布、访问控制流程、外部依赖 |
+| "常见陷阱不适用于此代码库" | 每个代码库都有常见陷阱 | 系统地用 grep/代码搜索检查所有指南陷阱 |
+| "测试存在，测试指南已满足" | 测试存在 ≠ 测试质量 | 检查覆盖率、属性测试、集成测试、失败情况 |
+| "我可以提供通用的最佳实践" | 通用建议不可操作 | 提供项目特定的发现，带有文件:行引用 |
+| "用户从发现中知道要改进什么" | 没有优先级排序的发现 = 没有行动计划 | 生成优先的改进路线图，带有具体的下一步 |
+
+---
+
+## 笔记
+
+- 我只分析相关部分（如果不存在，不会对升级产生幻觉）
+- 我将适应您的平台（Solidity、Rust、Cairo 等）
+- 我将使用可用工具（Slither 等），但如果没有它们也能工作
+- 我将为所有发现提供文件引用和行号
+- 我会询问我无法从代码推断的设计决策
+
+---
+
+## 准备好开始
+
+**我需要的**：
+- 访问您的代码库
+- 了解您的项目目标
+- 任何现有文档或规范
+- 有关部署计划的信息
+
+让我们分析您的代码库并使用 Trail of Bits 的最佳实践改进它！

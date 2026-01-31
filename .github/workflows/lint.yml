@@ -1,4 +1,4 @@
-name: Lint
+name: 代码检查
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.1
         with:
           persist-credentials: false
-      - name: Run shellcheck
+      - name: 运行 shellcheck
         run: find plugins -name "*.sh" -type f -exec shellcheck -x {} +
 
   shfmt:
@@ -45,11 +45,11 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.1
         with:
           persist-credentials: false
-      - name: Install shfmt
+      - name: 安装 shfmt
         run: |
           curl -sS https://webinstall.dev/shfmt | bash
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - name: Run shfmt
+      - name: 运行 shfmt
         run: find plugins -name "*.sh" -type f -exec shfmt -i 2 -ci -d {} +
 
   bats:
@@ -59,11 +59,11 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.1
         with:
           persist-credentials: false
-      - name: Install bats and uv
+      - name: 安装 bats 和 uv
         run: |
           sudo apt-get update
           sudo apt-get install -y bats
           curl -LsSf https://astral.sh/uv/install.sh | sh
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - name: Run hook tests
+      - name: 运行钩子测试
         run: bats plugins/modern-python/hooks/*.bats

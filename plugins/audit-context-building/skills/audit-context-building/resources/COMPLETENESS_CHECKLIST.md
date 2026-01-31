@@ -1,47 +1,47 @@
-# Completeness Checklist
+# 完整性清单
 
-Before concluding micro-analysis of a function, verify:
-
----
-
-## Structural Completeness
-- [ ] Purpose section: 2+ sentences explaining function role
-- [ ] Inputs & Assumptions section: All parameters + implicit inputs documented
-- [ ] Outputs & Effects section: All returns, state writes, external calls, events
-- [ ] Block-by-Block Analysis: Every logical block analyzed (no gaps)
-- [ ] Cross-Function Dependencies: All calls and shared state documented
+在结束函数的微观分析之前，验证：
 
 ---
 
-## Content Depth
-- [ ] Identified at least 3 invariants (what must always hold)
-- [ ] Documented at least 5 assumptions (what is assumed true)
-- [ ] Applied First Principles at least once
-- [ ] Applied 5 Whys or 5 Hows at least 3 times total
-- [ ] Risk analysis for all external interactions (reentrancy, malicious contracts, etc.)
+## 结构完整性
+- [ ] 目的部分：解释函数角色的 2+ 句
+- [ ] 输入和假设部分：所有参数 + 隐式输入已记录
+- [ ] 输出和效果部分：所有返回、状态写入、外部调用、事件
+- [ ] 逐块分析：每个逻辑块都分析了（无空白）
+- [ ] 跨函数依赖：所有调用和共享状态已记录
 
 ---
 
-## Continuity & Integration
-- [ ] Cross-reference with related functions (if internal calls exist, analyze callees)
-- [ ] Propagated assumptions from callers (if this function is called by others)
-- [ ] Identified invariant couplings (how this function's invariants relate to global system)
-- [ ] Tracked data flow across function boundaries (if applicable)
+## 内容深度
+- [ ] 识别了至少 3 个不变量（什么是必须始终成立的）
+- [ ] 记录了至少 5 个假设（什么是假设为真的）
+- [ ] 至少应用了 1 次第一性原理
+- [ ] 总共至少应用了 3 次 5个为什么或5个如何
+- [ ] 所有外部交互的风险分析（重入、恶意合约等）
 
 ---
 
-## Anti-Hallucination Verification
-- [ ] All claims reference specific line numbers (L45, L98-102, etc.)
-- [ ] No vague statements ("probably", "might", "seems to") - replaced with "unclear; need to check X"
-- [ ] Contradictions resolved (if earlier analysis conflicts with current findings, explicitly updated)
-- [ ] Evidence-based: Every invariant/assumption tied to actual code
+## 连续性和集成
+- [ ] 与相关函数交叉引用（如果存在内部调用，分析被调用者）
+- [ ] 传播了来自调用者的假设（如果此函数被其他函数调用）
+- [ ] 识别了不变量耦合（此函数的不变量如何与全局系统相关）
+- [ ] 跟踪了跨函数边界的数据流（如果适用）
 
 ---
 
-## Completeness Signal
+## 反幻觉验证
+- [ ] 所有声明都引用了特定的行号（L45, L98-102 等）
+- [ ] 没有模糊陈述（"可能"、"似乎"）- 用"不清晰；需要检查 X"替换
+- [ ] 矛盾已解决（如果早期分析与当前发现冲突，则明确更新）
+- [ ] 基于证据：每个不变量/假设都绑定到实际代码
 
-Analysis is complete when:
-1. All checklist items above are satisfied
-2. No remaining "TODO: analyze X" or "unclear Y" items
-3. Full call chain analyzed (for internal calls, jumped into and analyzed)
-4. All identified risks have mitigation analysis or acknowledged as unresolved
+---
+
+## 完整性信号
+
+当满足以下条件时分析完成：
+1. 以上所有清单项目都已满足
+2. 没有剩余的"TODO：分析 X"或"不清晰 Y"项目
+3. 完整的调用链已分析（对于内部调用，跳入并分析了）
+4. 所有识别的风险都有缓解分析或被确认为未解决

@@ -1,71 +1,71 @@
-# Output Requirements
+# 输出要求
 
-When performing ultra-granular analysis, Claude MUST structure output following the Per-Function Microstructure Checklist format demonstrated in [FUNCTION_MICRO_ANALYSIS_EXAMPLE.md](FUNCTION_MICRO_ANALYSIS_EXAMPLE.md).
-
----
-
-## Required Structure
-
-For EACH analyzed function, output MUST include:
-
-**1. Purpose** (mandatory)
-- Clear statement of function's role in the system
-- Impact on system state, security, or economics
-- Minimum 2-3 sentences
-
-**2. Inputs & Assumptions** (mandatory)
-- All parameters (explicit and implicit)
-- All preconditions
-- All trust assumptions
-- Each input must identify: type, source, trust level
-- Minimum 3 assumptions documented
-
-**3. Outputs & Effects** (mandatory)
-- Return values (or "void" if none)
-- All state writes
-- All external interactions
-- All events emitted
-- All postconditions
-- Minimum 3 effects documented
-
-**4. Block-by-Block Analysis** (mandatory)
-For EACH logical code block, document:
-- **What:** What the block does (1 sentence)
-- **Why here:** Why this ordering/placement (1 sentence)
-- **Assumptions:** What must be true (1+ items)
-- **Depends on:** What prior state/logic this relies on
-- **First Principles / 5 Whys / 5 Hows:** Apply at least ONE per block
-
-Minimum standards:
-- Analyze at minimum: ALL conditional branches, ALL external calls, ALL state modifications
-- For complex blocks (>5 lines): Apply First Principles AND 5 Whys or 5 Hows
-- For simple blocks (<5 lines): Minimum What + Why here + 1 Assumption
-
-**5. Cross-Function Dependencies** (mandatory)
-- Internal calls made (list all)
-- External calls made (list all with risk analysis)
-- Functions that call this function
-- Shared state with other functions
-- Invariant couplings (how this function's invariants interact with others)
-- Minimum 3 dependency relationships documented
+执行超细粒度分析时，Claude 必须遵循 [FUNCTION_MICRO_ANALYSIS_EXAMPLE.md](FUNCTION_MICRO_ANALYSIS_EXAMPLE.md) 中演示的每个函数微观结构清单格式。
 
 ---
 
-## Quality Thresholds
+## 必需结构
 
-A complete micro-analysis MUST identify:
-- Minimum 3 invariants (per function)
-- Minimum 5 assumptions (across all sections)
-- Minimum 3 risk considerations (especially for external interactions)
-- At least 1 application of First Principles
-- At least 3 applications of 5 Whys or 5 Hows (combined)
+对于**每个**分析的函数，输出**必须**包括：
+
+**1. 目的**（必需）
+- 函数在系统中角色的清晰陈述
+- 对系统状态、安全或经济的影响
+- 最少 2-3 句
+
+**2. 输入和假设**（必需）
+- 所有参数（显式和隐式）
+- 所有前置条件
+- 所有信任假设
+- 每个输入必须识别：类型、来源、信任级别
+- 最少记录 3 个假设
+
+**3. 输出和效果**（必需）
+- 返回值（或"空"如果没有）
+- 所有状态写入
+- 所有外部交互
+- 所有发出的事件
+- 所有后置条件
+- 最少记录 3 个效果
+
+**4. 逐块分析**（必需）
+对于**每个**逻辑代码块，记录：
+- **什么**：块做什么（1 句）
+- **为什么在这里**：为什么这个排序/放置（1 句）
+- **假设**：什么是必须为真的（1+ 项）
+- **依赖于**：这依赖什么先前的状态/逻辑
+- **第一性原理 / 5个为什么 / 5个如何**：每个块应用至少**一个**
+
+最低标准：
+- 至少分析：**所有**条件分支、**所有**外部调用、**所有**状态修改
+- 对于复杂块（>5 行）：应用第一性原理**和**5个为什么或5个如何
+- 对于简单块（<5 行）：最少什么 + 为什么在这里 + 1 个假设
+
+**5. 跨函数依赖**（必需）
+- 进行的内部调用（列出所有）
+- 进行的外部调用（列出所有，包含风险分析）
+- 调用此函数的函数
+- 与其他函数共享的状态
+- 不变量耦合（此函数的不变量如何与其他函数交互）
+- 最少记录 3 个依赖关系
 
 ---
 
-## Format Consistency
+## 质量阈值
 
-- Use markdown headers: `**Section Name:**` for major sections
-- Use bullet points (`-`) for lists
-- Use code blocks (` ```solidity `) for code snippets
-- Reference line numbers: `L45`, `lines 98-102`
-- Separate blocks with `---` horizontal rules for readability
+完整的微观分析**必须**识别：
+- 最少 3 个不变量（每个函数）
+- 最少 5 个假设（跨所有部分）
+- 最少 3 个风险考虑（特别是外部交互）
+- 至少 1 次第一性原理应用
+- 至少 3 次 5个为什么或5个如何的应用（综合）
+
+---
+
+## 格式一致性
+
+- 使用 markdown 标题：`**部分名称：**` 表示主要部分
+- 使用项目符号（`-`）表示列表
+- 使用代码块（` ```solidity `）表示代码片段
+- 引用行号：`L45`、`98-102 行`
+- 使用 `---` 水平规则分隔块以提高可读性

@@ -1,297 +1,298 @@
 ---
 name: audit-context-building
-description: Enables ultra-granular, line-by-line code analysis to build deep architectural context before vulnerability or bug finding.
+description: 启用超细粒度、逐行代码分析，在发现漏洞或错误之前构建深层架构上下文。
 ---
 
-# Deep Context Builder Skill (Ultra-Granular Pure Context Mode)
+# 深度上下文构建技能（超细粒度纯上下文模式）
 
-## 1. Purpose
+## 1. 目的
 
-This skill governs **how Claude thinks** during the context-building phase of an audit.
+此技能管理 Claude 在审计的上下文构建阶段的**思维方式**。
 
-When active, Claude will:
-- Perform **line-by-line / block-by-block** code analysis by default.
-- Apply **First Principles**, **5 Whys**, and **5 Hows** at micro scale.
-- Continuously link insights → functions → modules → entire system.
-- Maintain a stable, explicit mental model that evolves with new evidence.
-- Identify invariants, assumptions, flows, and reasoning hazards.
+激活时，Claude 将：
+- 默认执行**逐行/逐块**代码分析。
+- 在微观尺度上应用**第一性原理**、**5个为什么**和**5个如何**。
+- 持续将洞察 → 函数 → 模块 → 整个系统链接起来。
+- 维护一个随新证据演变的稳定、明确的心理模型。
+- 识别不变量、假设、流程和推理危险。
 
-This skill defines a structured analysis format (see Example: Function Micro-Analysis below) and runs **before** the vulnerability-hunting phase.
-
----
-
-## 2. When to Use This Skill
-
-Use when:
-- Deep comprehension is needed before bug or vulnerability discovery.
-- You want bottom-up understanding instead of high-level guessing.
-- Reducing hallucinations, contradictions, and context loss is critical.
-- Preparing for security auditing, architecture review, or threat modeling.
-
-Do **not** use for:
-- Vulnerability findings
-- Fix recommendations
-- Exploit reasoning
-- Severity/impact rating
+此技能定义了结构化分析格式（见下文示例：函数微观分析），并在**漏洞挖掘阶段之前**运行。
 
 ---
 
-## 3. How This Skill Behaves
+## 2. 何时使用此技能
 
-When active, Claude will:
-- Default to **ultra-granular analysis** of each block and line.
-- Apply micro-level First Principles, 5 Whys, and 5 Hows.
-- Build and refine a persistent global mental model.
-- Update earlier assumptions when contradicted ("Earlier I thought X; now Y.").
-- Periodically anchor summaries to maintain stable context.
-- Avoid speculation; express uncertainty explicitly when needed.
+在以下情况下使用：
+- 在发现错误或漏洞之前需要深入理解。
+- 想要自底向上的理解，而不是高层猜测。
+- 减少幻觉、矛盾和上下文丢失至关重要。
+- 准备安全审计、架构审查或威胁建模。
 
-Goal: **deep, accurate understanding**, not conclusions.
-
----
-
-## Rationalizations (Do Not Skip)
-
-| Rationalization | Why It's Wrong | Required Action |
-|-----------------|----------------|-----------------|
-| "I get the gist" | Gist-level understanding misses edge cases | Line-by-line analysis required |
-| "This function is simple" | Simple functions compose into complex bugs | Apply 5 Whys anyway |
-| "I'll remember this invariant" | You won't. Context degrades. | Write it down explicitly |
-| "External call is probably fine" | External = adversarial until proven otherwise | Jump into code or model as hostile |
-| "I can skip this helper" | Helpers contain assumptions that propagate | Trace the full call chain |
-| "This is taking too long" | Rushed context = hallucinated vulnerabilities later | Slow is fast |
+**不要**用于：
+- 漏洞发现
+- 修复建议
+- 利用推理
+- 严重性/影响评级
 
 ---
 
-## 4. Phase 1 — Initial Orientation (Bottom-Up Scan)
+## 3. 此技能的行为方式
 
-Before deep analysis, Claude performs a minimal mapping:
+激活时，Claude 将：
+- 默认对每个块和行进行**超细粒度分析**。
+- 应用微观层面的第一性原理、5个为什么和5个如何。
+- 构建和完善持久的全局心理模型。
+- 当被矛盾时更新早期假设（"我之前认为 X；现在 Y。"）。
+- 定期锚定摘要以保持稳定上下文。
+- 避免推测；必要时明确表达不确定性。
 
-1. Identify major modules/files/contracts.
-2. Note obvious public/external entrypoints.
-3. Identify likely actors (users, owners, relayers, oracles, other contracts).
-4. Identify important storage variables, dicts, state structs, or cells.
-5. Build a preliminary structure without assuming behavior.
-
-This establishes anchors for detailed analysis.
-
----
-
-## 5. Phase 2 — Ultra-Granular Function Analysis (Default Mode)
-
-Every non-trivial function receives full micro analysis.
-
-### 5.1 Per-Function Microstructure Checklist
-
-For each function:
-
-1. **Purpose**
-   - Why the function exists and its role in the system.
-
-2. **Inputs & Assumptions**
-   - Parameters and implicit inputs (state, sender, env).
-   - Preconditions and constraints.
-
-3. **Outputs & Effects**
-   - Return values.
-   - State/storage writes.
-   - Events/messages.
-   - External interactions.
-
-4. **Block-by-Block / Line-by-Line Analysis**
-   For each logical block:
-   - What it does.
-   - Why it appears here (ordering logic).
-   - What assumptions it relies on.
-   - What invariants it establishes or maintains.
-   - What later logic depends on it.
-
-   Apply per-block:
-   - **First Principles**
-   - **5 Whys**
-   - **5 Hows**
+目标：**深入、准确的理解**，而不是结论。
 
 ---
 
-### 5.2 Cross-Function & External Flow Analysis
-*(Full Integration of Jump-Into-External-Code Rule)*
+## 4. 合理化（不要跳过）
 
-When encountering calls, **continue the same micro-first analysis across boundaries.**
-
-#### Internal Calls
-- Jump into the callee immediately.
-- Perform block-by-block analysis of relevant code.
-- Track flow of data, assumptions, and invariants:
-  caller → callee → return → caller.
-- Note if callee logic behaves differently in this specific call context.
-
-#### External Calls — Two Cases
-
-**Case A — External Call to a Contract Whose Code Exists in the Codebase**
-Treat as an internal call:
-- Jump into the target contract/function.
-- Continue block-by-block micro-analysis.
-- Propagate invariants and assumptions seamlessly.
-- Consider edge cases based on the *actual* code, not a black-box guess.
-
-**Case B — External Call Without Available Code (True External / Black Box)**
-Analyze as adversarial:
-- Describe payload/value/gas or parameters sent.
-- Identify assumptions about the target.
-- Consider all outcomes:
-  - revert
-  - incorrect/strange return values
-  - unexpected state changes
-  - misbehavior
-  - reentrancy (if applicable)
-
-#### Continuity Rule
-Treat the entire call chain as **one continuous execution flow**.
-Never reset context.
-All invariants, assumptions, and data dependencies must propagate across calls.
+| 合理化 | 为什么它是错误的 | 必需的操作 |
+|--------|------------------|------------|
+| "我理解了要点" | 要点级别的理解会遗漏边界情况 | 需要逐行分析 |
+| "这个函数很简单" | 简单函数组合成复杂错误 | 仍然应用5个为什么 |
+| "我会记住这个不变量" | 你不会。上下文会退化。 | 明确写下来 |
+| "外部调用可能没问题" | 外部 = 直到被证明否则是敌对的 | 跳入代码或建模为敌对 |
+| "我可以跳过这个辅助函数" | 辅助函数包含传播的假设 | 追踪完整的调用链 |
+| "这花了太长时间" | 仓促的上下文 = 稍后产生幻觉的漏洞 | 慢就是快 |
 
 ---
 
-### 5.3 Complete Analysis Example
+## 5. 第1阶段 — 初始定向（自底向上扫描）
 
-See [FUNCTION_MICRO_ANALYSIS_EXAMPLE.md](resources/FUNCTION_MICRO_ANALYSIS_EXAMPLE.md) for a complete walkthrough demonstrating:
-- Full micro-analysis of a DEX swap function
-- Application of First Principles, 5 Whys, and 5 Hows
-- Block-by-block analysis with invariants and assumptions
-- Cross-function dependency mapping
-- Risk analysis for external interactions
+在深入分析之前，Claude 执行最小映射：
 
-This example demonstrates the level of depth and structure required for all analyzed functions.
+1. 识别主要模块/文件/合约。
+2. 注意明显的公共/外部入口点。
+3. 识别可能的参与者（用户、所有者、中继者、预言机、其他合约）。
+4. 识别重要的存储变量、字典、状态结构或单元。
+5. 在不假设行为的情况下构建初步结构。
 
----
-
-### 5.4 Output Requirements
-
-When performing ultra-granular analysis, Claude MUST structure output following the format defined in [OUTPUT_REQUIREMENTS.md](resources/OUTPUT_REQUIREMENTS.md).
-
-Key requirements:
-- **Purpose** (2-3 sentences minimum)
-- **Inputs & Assumptions** (all parameters, preconditions, trust assumptions)
-- **Outputs & Effects** (returns, state writes, external calls, events, postconditions)
-- **Block-by-Block Analysis** (What, Why here, Assumptions, First Principles/5 Whys/5 Hows)
-- **Cross-Function Dependencies** (internal calls, external calls with risk analysis, shared state)
-
-Quality thresholds:
-- Minimum 3 invariants per function
-- Minimum 5 assumptions documented
-- Minimum 3 risk considerations for external interactions
-- At least 1 First Principles application
-- At least 3 combined 5 Whys/5 Hows applications
+这为详细分析建立了锚点。
 
 ---
 
-### 5.5 Completeness Checklist
+## 6. 第2阶段 — 超细粒度函数分析（默认模式）
 
-Before concluding micro-analysis of a function, verify against the [COMPLETENESS_CHECKLIST.md](resources/COMPLETENESS_CHECKLIST.md):
+每个非平凡函数都接收完整的微观分析。
 
-- **Structural Completeness**: All required sections present (Purpose, Inputs, Outputs, Block-by-Block, Dependencies)
-- **Content Depth**: Minimum thresholds met (invariants, assumptions, risk analysis, First Principles)
-- **Continuity & Integration**: Cross-references, propagated assumptions, invariant couplings
-- **Anti-Hallucination**: Line number citations, no vague statements, evidence-based claims
+### 6.1 每个函数的微观结构清单
 
-Analysis is complete when all checklist items are satisfied and no unresolved "unclear" items remain.
+对于每个函数：
 
----
+1. **目的**
+   - 函数存在的原因及其在系统中的作用。
 
-## 6. Phase 3 — Global System Understanding
+2. **输入和假设**
+   - 参数和隐式输入（状态、发送者、环境）。
+   - 前置条件和约束。
 
-After sufficient micro-analysis:
+3. **输出和效果**
+   - 返回值。
+   - 状态/存储写入。
+   - 事件/消息。
+   - 外部交互。
 
-1. **State & Invariant Reconstruction**
-   - Map reads/writes of each state variable.
-   - Derive multi-function and multi-module invariants.
+4. **逐块/逐行分析**
+   对于每个逻辑块：
+   - 它做什么。
+   - 为什么出现在这里（排序逻辑）。
+   - 它依赖什么假设。
+   - 它建立或维持什么不变量。
+   - 什么后续逻辑依赖于它。
 
-2. **Workflow Reconstruction**
-   - Identify end-to-end flows (deposit, withdraw, lifecycle, upgrades).
-   - Track how state transforms across these flows.
-   - Record assumptions that persist across steps.
-
-3. **Trust Boundary Mapping**
-   - Actor → entrypoint → behavior.
-   - Identify untrusted input paths.
-   - Privilege changes and implicit role expectations.
-
-4. **Complexity & Fragility Clustering**
-   - Functions with many assumptions.
-   - High branching logic.
-   - Multi-step dependencies.
-   - Coupled state changes across modules.
-
-These clusters help guide the vulnerability-hunting phase.
+   每个块应用：
+   - **第一性原理**
+   - **5个为什么**
+   - **5个如何**
 
 ---
 
-## 7. Stability & Consistency Rules
-*(Anti-Hallucination, Anti-Contradiction)*
+### 6.2 跨函数和外部流程分析
+*（完全整合跳入外部代码规则）*
 
-Claude must:
+遇到调用时，**继续跨边界进行相同的微观优先分析。*
 
-- **Never reshape evidence to fit earlier assumptions.**
-  When contradicted:
-  - Update the model.
-  - State the correction explicitly.
+#### 内部调用
+- 立即跳入被调用函数。
+- 对相关代码执行逐块分析。
+- 跟踪数据、假设和不变量的流程：
+  调用者 → 被调用者 → 返回 → 调用者。
+- 注意被调用者逻辑在这个特定调用上下文中的行为是否不同。
 
-- **Periodically anchor key facts**
-  Summarize core:
-  - invariants
-  - state relationships
-  - actor roles
-  - workflows
+#### 外部调用 — 两种情况
 
-- **Avoid vague guesses**
-  Use:
-  - "Unclear; need to inspect X."
-  instead of:
-  - "It probably…"
+**情况 A — 对代码库中存在代码的合约的外部调用**
+视为内部调用：
+- 跳入目标合约/函数。
+- 继续逐块微观分析。
+- 无缝传播不变量和假设。
+- 基于*实际*代码考虑边界情况，而不是黑盒猜测。
 
-- **Cross-reference constantly**
-  Connect new insights to previous state, flows, and invariants to maintain global coherence.
+**情况 B — 没有可用代码的外部调用（真正的外部/黑盒）**
+分析为敌对的：
+- 描述发送的有效载荷/值/气体或参数。
+- 识别关于目标的假设。
+- 考虑所有结果：
+  - 回滚
+  - 错误/奇怪的返回值
+  - 意外状态更改
+  - 不当行为
+  - 重入（如果适用）
 
----
+#### 连续性规则
 
-## 8. Subagent Usage
-
-Claude may spawn subagents for:
-- Dense or complex functions.
-- Long data-flow or control-flow chains.
-- Cryptographic / mathematical logic.
-- Complex state machines.
-- Multi-module workflow reconstruction.
-
-Subagents must:
-- Follow the same micro-first rules.
-- Return summaries that Claude integrates into its global model.
+将整个调用链视为**一个连续的执行流程**。
+永远不要重置上下文。
+所有不变量、假设和数据依赖必须跨调用传播。
 
 ---
 
-## 9. Relationship to Other Phases
+### 6.3 完整分析示例
 
-This skill runs **before**:
-- Vulnerability discovery
-- Classification / triage
-- Report writing
-- Impact modeling
-- Exploit reasoning
+参见 [FUNCTION_MICRO_ANALYSIS_EXAMPLE.md](resources/FUNCTION_MICRO_ANALYSIS_EXAMPLE.md) 了解完整演练，演示：
+- DEX 交换函数的完整微观分析
+- 第一性原理、5个为什么和5个如何的应用
+- 逐块分析，包含不变量和假设
+- 跨函数依赖映射
+- 外部交互的风险分析
 
-It exists solely to build:
-- Deep understanding
-- Stable context
-- System-level clarity
+此示例演示了所有分析函数所需的具体深度和结构。
 
 ---
 
-## 10. Non-Goals
+### 6.4 输出要求
 
-While active, Claude should NOT:
-- Identify vulnerabilities
-- Propose fixes
-- Generate proofs-of-concept
-- Model exploits
-- Assign severity or impact
+执行超细粒度分析时，Claude 必须遵循 [OUTPUT_REQUIREMENTS.md](resources/OUTPUT_REQUIREMENTS.md) 中定义的格式结构化输出。
 
-This is **pure context building** only.
+关键要求：
+- **目的**（至少 2-3 句）
+- **输入和假设**（所有参数、前置条件、信任假设）
+- **输出和效果**（返回、状态写入、外部调用、事件、后置条件）
+- **逐块分析**（什么、为什么在这里、假设、第一性原理/5个为什么/5个如何）
+- **跨函数依赖**（内部调用、带风险分析的外部调用、共享状态）
+
+质量阈值：
+- 每个函数至少 3 个不变量
+- 至少记录 5 个假设
+- 外部交互至少 3 个风险考虑
+- 至少 1 次第一性原理应用
+- 至少 3 次 5个为什么/5个如何的综合应用
+
+---
+
+### 6.5 完整性清单
+
+在结束函数的微观分析之前，根据 [COMPLETENESS_CHECKLIST.md](resources/COMPLETENESS_CHECKLIST.md) 验证：
+
+- **结构完整性**：所有必需部分都存在（目的、输入、输出、逐块、依赖）
+- **内容深度**：达到最小阈值（不变量、假设、风险分析、第一性原理）
+- **连续性和集成**：交叉引用、传播的假设、不变量耦合
+- **反幻觉**：行号引用，没有模糊陈述，基于证据的声明
+
+当所有清单项目都满足且没有未解决的"不清晰"项目时，分析完成。
+
+---
+
+## 7. 第3阶段 — 全局系统理解
+
+在足够的微观分析之后：
+
+1. **状态和不变量重建**
+   - 映射每个状态变量的读取/写入。
+   - 推导多函数和多模块不变量。
+
+2. **工作流重建**
+   - 识别端到端流程（存款、提取、生命周期、升级）。
+   - 跟踪状态如何在这些流程中转换。
+   - 记录跨步骤持续存在的假设。
+
+3. **信任边界映射**
+   - 参与者 → 入口点 → 行为。
+   - 识别不受信任的输入路径。
+   - 权限更改和隐式角色期望。
+
+4. **复杂性和脆弱性聚类**
+   - 具有许多假设的函数。
+   - 高分支逻辑。
+   - 多步依赖。
+   - 跨模块的耦合状态更改。
+
+这些聚类有助于指导漏洞挖掘阶段。
+
+---
+
+## 8. 稳定性和一致性规则
+*（反幻觉、反矛盾）*
+
+Claude 必须：
+
+- **永远不要重塑证据以适应早期假设。**
+  当被矛盾时：
+  - 更新模型。
+  - 明确陈述更正。
+
+- **定期锚定关键事实**
+  摘要核心：
+  - 不变量
+  - 状态关系
+  - 参与者角色
+  - 工作流程
+
+- **避免模糊猜测**
+  使用：
+  - "不清晰；需要检查 X。"
+  而不是：
+  - "它可能……"
+
+- **不断交叉引用**
+  将新洞察与之前的状态、流程和不变量连接起来，以保持全局一致性。
+
+---
+
+## 9. 子代理使用
+
+Claude 可以为以下情况生成子代理：
+- 密集或复杂的函数。
+- 长的数据流或控制流链。
+- 加密/数学逻辑。
+- 复杂状态机。
+- 多模块工作流重建。
+
+子代理必须：
+- 遵循相同的微观优先规则。
+- 返回 Claude 可以集成到其全局模型的摘要。
+
+---
+
+## 10. 与其他阶段的关系
+
+此技能在**之前**运行：
+- 漏洞发现
+- 分类/分流
+- 报告编写
+- 影响建模
+- 利用推理
+
+它的存在仅为了建立：
+- 深入理解
+- 稳定上下文
+- 系统级清晰度
+
+---
+
+## 11. 非目标
+
+激活时，Claude 不应该：
+- 识别漏洞
+- 提出修复建议
+- 生成概念验证
+- 建模利用
+- 分配严重性或影响
+
+这**只是纯上下文构建**。

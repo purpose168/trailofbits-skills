@@ -1,58 +1,58 @@
-# Audit Context Building
+# 审计上下文构建
 
-Build deep architectural context through ultra-granular code analysis before vulnerability hunting.
+在进行漏洞挖掘之前，通过超细粒度代码分析构建深层架构上下文。
 
-**Author:** Omar Inuwa
+**作者：** Omar Inuwa
 
-## When to Use
+## 何时使用
 
-Use this skill when you need to:
-- Develop deep comprehension of a codebase before security auditing
-- Build bottom-up understanding instead of high-level guessing
-- Reduce hallucinations and context loss during complex analysis
-- Prepare for threat modeling or architecture review
+在以下情况下使用此技能：
+- 在安全审计之前需要深入理解代码库
+- 想要自底向上的理解，而不是高层猜测
+- 减少复杂分析期间的幻觉和上下文丢失
+- 准备威胁建模或架构审查
 
-## What It Does
+## 它做什么
 
-This skill governs how Claude thinks during the context-building phase of an audit. When active, Claude will:
+此技能管理 Claude 在审计的上下文构建阶段的思维方式。激活时，Claude 将：
 
-- Perform **line-by-line / block-by-block** code analysis
-- Apply **First Principles**, **5 Whys**, and **5 Hows** at micro scale
-- Build and maintain a stable, explicit mental model
-- Identify invariants, assumptions, flows, and reasoning hazards
-- Track cross-function and external call flows with full context propagation
+- 执行**逐行/逐块**代码分析
+- 在微观尺度上应用**第一性原理**、**5个为什么**和**5个如何**
+- 构建和维护稳定、明确的心理模型
+- 识别不变量、假设、流程和推理危险
+- 跟踪跨函数和外部调用流程，并传播完整上下文
 
-## Key Principle
+## 关键原则
 
-This is a **pure context building** skill. It does NOT:
-- Identify vulnerabilities
-- Propose fixes
-- Generate proofs-of-concept
-- Assign severity or impact
+这是一个**纯上下文构建**技能。它不会：
+- 识别漏洞
+- 提出修复建议
+- 生成概念验证
+- 分配严重性或影响
 
-It exists solely to build deep understanding before the vulnerability-hunting phase.
+它仅存在于漏洞挖掘阶段之前建立深入理解。
 
-## Installation
+## 安装
 
 ```
 /plugin install trailofbits/skills/plugins/audit-context-building
 ```
 
-## Phases
+## 阶段
 
-1. **Initial Orientation** - Map modules, entrypoints, actors, and storage
-2. **Ultra-Granular Function Analysis** - Line-by-line semantic analysis with cross-function flow tracking
-3. **Global System Understanding** - State/invariant reconstruction, workflow mapping, trust boundaries
+1. **初始定向** - 映射模块、入口点、参与者和存储
+2. **超细粒度函数分析** - 逐行语义分析，跨函数流程跟踪
+3. **全局系统理解** - 状态/不变量重建、工作流映射、信任边界
 
-## Anti-Hallucination Rules
+## 反幻觉规则
 
-- Never reshape evidence to fit earlier assumptions
-- Update the model explicitly when contradicted
-- Avoid vague guesses; use "Unclear; need to inspect X"
-- Cross-reference constantly to maintain global coherence
+- 永远不要重塑证据以适应早期假设
+- 当被矛盾时明确更新模型
+- 避免模糊猜测；使用"不清晰；需要检查 X"
+- 不断交叉引用以保持全局一致性
 
-## Related Skills
+## 相关技能
 
-- `issue-writer` - Write up findings after context is built
-- `differential-review` - Uses context-building for baseline analysis
-- `spec-compliance` - Compare understood behavior to documentation
+- `issue-writer` - 在上下文构建后撰写发现
+- `differential-review` - 使用上下文构建进行基线分析
+- `spec-compliance` - 将理解的行为与文档进行比较

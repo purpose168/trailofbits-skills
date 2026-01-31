@@ -1,409 +1,409 @@
 ---
 name: audit-prep-assistant
-description: Prepare your codebase for security review using Trail of Bits' checklist. Helps set review goals, runs static analysis tools, increases test coverage, removes dead code, ensures accessibility, and generates comprehensive documentation (flowcharts, user stories, inline comments). (project, gitignored)
+description: 使用 Trail of Bits 的清单准备代码库进行安全审查。帮助设定审查目标、运行静态分析工具、增加测试覆盖率、删除死代码、确保可访问性，并生成综合文档（流程图、用户故事、代码内注释）。（项目，gitignored）
 ---
 
-# Audit Prep Assistant
+# 审计准备助手
 
-## Purpose
+## 目的
 
-I'll help you prepare for a security review using Trail of Bits' checklist. A well-prepared codebase makes the review process smoother and more effective.
+我将使用 Trail of Bits 的清单帮助您准备进行安全审查。准备好的代码库使审查过程更顺畅、更有效。
 
-**Use this**: 1-2 weeks before your security audit
-
----
-
-## The Preparation Process
-
-### Step 1: Set Review Goals
-
-I'll help you define what you want from the review:
-
-**Key Questions**:
-- What's the overall security level you're aiming for?
-- What areas concern you most?
-  - Previous audit issues?
-  - Complex components?
-  - Fragile parts?
-- What's the worst-case scenario for your project?
-
-I'll document your goals to share with the assessment team.
+**使用此技能**：安全审计前 1-2 周
 
 ---
 
-### Step 2: Resolve Easy Issues
+## 准备过程
 
-I'll run static analysis and help you fix low-hanging fruit:
+### 第1步：设定审查目标
 
-**Run Static Analysis**:
+我将帮助您定义想要从审查中获得的内容：
 
-For Solidity:
+**关键问题**：
+- 您旨在的整体安全级别是什么？
+- 您最关心哪些领域？
+  - 以前的审计问题？
+  - 复杂的组件？
+  - 脆弱的部分？
+- 项目最坏的情况是什么？
+
+我将记录您的目标与评估团队分享。
+
+---
+
+### 第2步：解决简单问题
+
+我将运行静态分析并帮助您修复容易解决的问题：
+
+**运行静态分析**：
+
+对于 Solidity：
 ```bash
 slither . --exclude-dependencies
 ```
 
-For Rust:
+对于 Rust：
 ```bash
 dylint --all
 ```
 
-For Go:
+对于 Go：
 ```bash
 golangci-lint run
 ```
 
-For Go/Rust/C++:
+对于 Go/Rust/C++：
 ```bash
-# CodeQL and Semgrep checks
+# CodeQL 和 Semgrep 检查
 ```
 
-Then I'll:
-- Triage all findings
-- Help fix easy issues
-- Document accepted risks
+然后我将：
+- 对所有发现进行分类
+- 帮助修复简单问题
+- 记录已接受的风险
 
-**Increase Test Coverage**:
-- Analyze current coverage
-- Identify untested code
-- Suggest new tests
-- Run full test suite
+**增加测试覆盖率**：
+- 分析当前覆盖率
+- 识别未测试的代码
+- 建议新测试
+- 运行完整测试套件
 
-**Remove Dead Code**:
-- Find unused functions/variables
-- Identify unused libraries
-- Locate stale features
-- Suggest cleanup
+**删除死代码**：
+- 查找未使用的函数/变量
+- 识别未使用的库
+- 定位过时的功能
+- 建议清理
 
-**Goal**: Clean static analysis report, high test coverage, minimal dead code
-
----
-
-### Step 3: Ensure Code Accessibility
-
-I'll help make your code clear and accessible:
-
-**Provide Detailed File List**:
-- List all files in scope
-- Mark out-of-scope files
-- Explain folder structure
-- Document dependencies
-
-**Create Build Instructions**:
-- Write step-by-step setup guide
-- Test on fresh environment
-- Document dependencies and versions
-- Verify build succeeds
-
-**Freeze Stable Version**:
-- Identify commit hash for review
-- Create dedicated branch
-- Tag release version
-- Lock dependencies
-
-**Identify Boilerplate**:
-- Mark copied/forked code
-- Highlight your modifications
-- Document third-party code
-- Focus review on your code
+**目标**：干净的静态分析报告、高测试覆盖率、最小死代码
 
 ---
 
-### Step 4: Generate Documentation
+### 第3步：确保代码可访问性
 
-I'll help create comprehensive documentation:
+我将帮助使您的代码清晰且可访问：
 
-**Flowcharts and Sequence Diagrams**:
-- Map primary workflows
-- Show component relationships
-- Visualize data flow
-- Identify critical paths
+**提供详细文件列表**：
+- 列出范围内的所有文件
+- 标记范围外的文件
+- 解释文件夹结构
+- 记录依赖项
 
-**User Stories**:
-- Define user roles
-- Document use cases
-- Explain interactions
-- Clarify expectations
+**创建构建说明**：
+- 编写逐步设置指南
+- 在新环境中测试
+- 记录依赖项和版本
+- 验证构建成功
 
-**On-chain/Off-chain Assumptions**:
-- Data validation procedures
-- Oracle information
-- Bridge assumptions
-- Trust boundaries
+**冻结稳定版本**：
+- 识别审查的提交哈希
+- 创建专用分支
+- 标记发布版本
+- 锁定依赖项
 
-**Actors and Privileges**:
-- List all actors
-- Document roles
-- Define privileges
-- Map access controls
-
-**External Developer Docs**:
-- Link docs to code
-- Keep synchronized
-- Explain architecture
-- Document APIs
-
-**Function Documentation**:
-- System and function invariants
-- Parameter ranges (min/max values)
-- Arithmetic formulas and precision loss
-- Complex logic explanations
-- NatSpec for Solidity
-
-**Glossary**:
-- Define domain terms
-- Explain acronyms
-- Consistent terminology
-- Business logic concepts
-
-**Video Walkthroughs** (optional):
-- Complex workflows
-- Areas of concern
-- Architecture overview
+**识别样板代码**：
+- 标记复制/分叉的代码
+- 突出显示您的修改
+- 记录第三方代码
+- 专注于审查您的代码
 
 ---
 
-## How I Work
+### 第4步：生成文档
 
-When invoked, I will:
+我将帮助创建综合文档：
 
-1. **Help set review goals** - Ask about concerns and document them
-2. **Run static analysis** - Execute appropriate tools for your platform
-3. **Analyze test coverage** - Identify gaps and suggest improvements
-4. **Find dead code** - Search for unused code and libraries
-5. **Review accessibility** - Check build instructions and scope clarity
-6. **Generate documentation** - Create flowcharts, user stories, glossaries
-7. **Create prep checklist** - Track what's done and what's remaining
+**流程图和序列图**：
+- 映射主要工作流
+- 显示组件关系
+- 可视化数据流
+- 识别关键路径
 
-I'll adapt based on:
-- Your platform (Solidity, Rust, Go, etc.)
-- Available tools
-- Existing documentation
-- Review timeline
+**用户故事**：
+- 定义用户角色
+- 记录用例
+- 解释交互
+- 澄清期望
+
+**链上/链下假设**：
+- 数据验证程序
+- 预言机信息
+- 桥接假设
+- 信任边界
+
+**参与者和权限**：
+- 列出所有参与者
+- 记录角色
+- 定义权限
+- 映射访问控制
+
+**外部开发者文档**：
+- 将文档链接到代码
+- 保持同步
+- 解释架构
+- 记录 API
+
+**函数文档**：
+- 系统和函数不变量
+- 参数范围（最小/最大值）
+- 算术公式和精度损失
+- 复杂逻辑解释
+- Solidity 的 NatSpec
+
+**术语表**：
+- 定义领域术语
+- 解释首字母缩写
+- 一致的术语
+- 业务逻辑概念
+
+**视频导览**（可选）：
+- 复杂工作流
+- 关注的领域
+- 架构概述
 
 ---
 
-## Rationalizations (Do Not Skip)
+## 我如何工作
 
-| Rationalization | Why It's Wrong | Required Action |
-|-----------------|----------------|-----------------|
-| "README covers setup, no need for detailed build instructions" | READMEs assume context auditors don't have | Test build on fresh environment, document every dependency version |
-| "Static analysis already ran, no need to run again" | Codebase changed since last run | Execute static analysis tools, generate fresh report |
-| "Test coverage looks decent" | "Looks decent" isn't measured coverage | Run coverage tools, identify specific untested code paths |
-| "Not much dead code to worry about" | Dead code hides during manual review | Use automated detection tools to find unused functions/variables |
-| "Architecture is straightforward, no diagrams needed" | Text descriptions miss visual patterns | Generate actual flowcharts and sequence diagrams |
-| "Can freeze version right before audit" | Last-minute freezing creates rushed handoff | Identify and document commit hash now, create dedicated branch |
-| "Terms are self-explanatory" | Domain knowledge isn't universal | Create comprehensive glossary with all domain-specific terms |
-| "I'll do this step later" | Steps build on each other - skipping creates gaps | Complete all 4 steps sequentially, track progress with checklist |
+调用时，我将：
+
+1. **帮助设定审查目标** - 询问关注点并记录
+2. **运行静态分析** - 为您的平台执行适当工具
+3. **分析测试覆盖率** - 识别差距并建议改进
+4. **查找死代码** - 搜索未使用的代码和库
+5. **审查可访问性** - 检查构建说明和范围清晰度
+6. **生成文档** - 创建流程图、用户故事、术语表
+7. **创建准备清单** - 跟踪已完成和剩余的内容
+
+我将根据以下内容进行调整：
+- 您的平台（Solidity、Rust、Go 等）
+- 可用工具
+- 现有文档
+- 审查时间表
 
 ---
 
-## Example Output
+## 合理化（不要跳过）
 
-When I finish helping you prepare, you'll have concrete deliverables like:
+| 合理化 | 为什么它是错误的 | 必需的操作 |
+|--------|------------------|------------|
+| "README 涵盖设置，不需要详细的构建说明" | README 假设审计员没有的上下文 | 在新环境中测试构建，记录每个依赖版本 |
+| "静态分析已经运行，不需要再次运行" | 自上次运行以来代码库已更改 | 执行静态分析工具，生成新报告 |
+| "测试覆盖率看起来不错" | "看起来不错"不是衡量的覆盖率 | 运行覆盖率工具，识别特定的未测试代码路径 |
+| "没有太多死代码需要担心" | 死代码在手动审查期间隐藏 | 使用自动化检测工具查找未使用的函数/变量 |
+| "架构很简单，不需要图表" | 文本描述遗漏视觉模式 | 生成实际的流程图和序列图 |
+| "可以在审计前立即冻结版本" | 最后时刻冻结会产生仓促的交接 | 现在识别并记录提交哈希，创建专用分支 |
+| "术语是不言自明的" | 领域知识不是普遍的 | 创建包含所有领域特定术语的综合术语表 |
+| "我稍后会做这一步" | 步骤相互构建 - 跳过会产生差距 | 按顺序完成所有 4 个步骤，用清单跟踪进度 |
+
+---
+
+## 示例输出
+
+当我帮助您完成准备时，您将获得具体的交付物：
 
 ```
-=== AUDIT PREP PACKAGE ===
+=== 审计准备包 ===
 
-Project: DeFi DEX Protocol
-Audit Date: March 15, 2024
-Preparation Status: Complete
-
----
-
-## REVIEW GOALS DOCUMENT
-
-Security Objectives:
-- Verify economic security of liquidity pool swaps
-- Validate oracle manipulation resistance
-- Assess flash loan attack vectors
-
-Areas of Concern:
-1. Complex AMM pricing calculation (src/SwapRouter.sol:89-156)
-2. Multi-hop swap routing logic (src/Router.sol)
-3. Oracle price aggregation (src/PriceOracle.sol:45-78)
-
-Worst-Case Scenario:
-- Flash loan attack drains liquidity pools via oracle manipulation
-
-Questions for Auditors:
-- Can the AMM pricing model produce negative slippage under edge cases?
-- Is the slippage protection sufficient to prevent sandwich attacks?
-- How resilient is the system to temporary oracle failures?
+项目：DeFi DEX 协议
+审计日期：2024年3月15日
+准备状态：完成
 
 ---
 
-## STATIC ANALYSIS REPORT
+## 审查目标文档
 
-Slither Scan Results:
-✓ High: 0 issues
-✓ Medium: 0 issues
-⚠ Low: 2 issues (triaged - documented in TRIAGE.md)
-ℹ Info: 5 issues (code style, acceptable)
+安全目标：
+- 验证流动性池交换的经济安全性
+- 验证预言机操纵抵抗
+- 评估闪电贷攻击向量
 
-Tool: slither . --exclude-dependencies
-Date: March 1, 2024
-Status: CLEAN (all critical issues resolved)
+关注领域：
+1. 复杂的 AMM 定价计算 (src/SwapRouter.sol:89-156)
+2. 多跳交换路由逻辑 (src/Router.sol)
+3. 预言机价格聚合 (src/PriceOracle.sol:45-78)
 
----
+最坏情况场景：
+- 闪电贷攻击通过预言机操纵耗尽流动性池
 
-## TEST COVERAGE REPORT
-
-Overall Coverage: 94%
-- Statements: 1,245 / 1,321 (94%)
-- Branches: 456 / 498 (92%)
-- Functions: 89 / 92 (97%)
-
-Uncovered Areas:
-- Emergency pause admin functions (tested manually)
-- Governance migration path (one-time use)
-
-Command: forge coverage
-Status: EXCELLENT
+审计员问题：
+- AMM 定价模型在边缘情况下是否会产生负滑点？
+- 滑点保护是否足以防止 sandwich 攻击？
+- 系统对临时预言机故障的恢复能力如何？
 
 ---
 
-## CODE SCOPE
+## 静态分析报告
 
-In-Scope Files (8):
-✓ src/SwapRouter.sol (456 lines)
-✓ src/LiquidityPool.sol (234 lines)
-✓ src/PairFactory.sol (389 lines)
-✓ src/PriceOracle.sol (167 lines)
-✓ src/LiquidityManager.sol (298 lines)
-✓ src/Governance.sol (201 lines)
-✓ src/FlashLoan.sol (145 lines)
-✓ src/RewardsDistributor.sol (178 lines)
+Slither 扫描结果：
+✓ 高：0 个问题
+✓ 中：0 个问题
+⚠ 低：2 个问题（已分类 - 记录在 TRIAGE.md 中）
+ℹ 信息：5 个问题（代码风格，可接受）
 
-Out-of-Scope:
-- lib/ (OpenZeppelin, external dependencies)
-- test/ (test contracts)
-- scripts/ (deployment scripts)
-
-Total In-Scope: 2,068 lines of Solidity
+工具：slither . --exclude-dependencies
+日期：2024年3月1日
+状态：清洁（所有关键问题已解决）
 
 ---
 
-## BUILD INSTRUCTIONS
+## 测试覆盖率报告
 
-Prerequisites:
+整体覆盖率：94%
+- 语句：1,245 / 1,321 (94%)
+- 分支：456 / 498 (92%)
+- 函数：89 / 92 (97%)
+
+未覆盖领域：
+- 紧急暂停管理员功能（手动测试）
+- 治理迁移路径（一次性使用）
+
+命令：forge 覆盖率
+状态：优秀
+
+---
+
+## 代码范围
+
+范围内文件（8 个）：
+✓ src/SwapRouter.sol (456 行)
+✓ src/LiquidityPool.sol (234 行)
+✓ src/PairFactory.sol (389 行)
+✓ src/PriceOracle.sol (167 行)
+✓ src/LiquidityManager.sol (298 行)
+✓ src/Governance.sol (201 行)
+✓ src/FlashLoan.sol (145 行)
+✓ src/RewardsDistributor.sol (178 行)
+
+范围外：
+- lib/ (OpenZeppelin，外部依赖)
+- test/ (测试合约)
+- scripts/ (部署脚本)
+
+总范围内：2,068 行 Solidity
+
+---
+
+## 构建说明
+
+先决条件：
 - Foundry 0.2.0+
 - Node.js 18+
 - Git
 
-Setup:
+设置：
 ```bash
 git clone https://github.com/project/repo.git
 cd repo
-git checkout audit-march-2024  # Frozen branch
+git checkout audit-march-2024  # 冻结分支
 forge install
 forge build
 forge test
 ```
 
-Verification:
-✓ Build succeeds without errors
-✓ All 127 tests pass
-✓ No warnings from compiler
+验证：
+✓ 构建成功，无错误
+✓ 所有 127 个测试通过
+✓ 编译器无警告
 
 ---
 
-## DOCUMENTATION
+## 文档
 
-Generated Artifacts:
-✓ ARCHITECTURE.md - System overview with diagrams
-✓ USER_STORIES.md - 12 user interaction flows
-✓ GLOSSARY.md - 34 domain terms defined
+生成的工件：
+✓ ARCHITECTURE.md - 带图表的系统概述
+✓ USER_STORIES.md - 12 个用户交互流程
+✓ GLOSSARY.md - 34 个领域术语定义
 ✓ docs/diagrams/contract-interactions.png
 ✓ docs/diagrams/swap-flow.png
 ✓ docs/diagrams/state-machine.png
 
-NatSpec Coverage: 100% of public functions
+NatSpec 覆盖率：100% 的公共函数
 
 ---
 
-## DEPLOYMENT INFO
+## 部署信息
 
-Network: Ethereum Mainnet
-Commit: abc123def456 (audit-march-2024 branch)
-Deployed Contracts:
-- SwapRouter: 0x1234...
-- PriceOracle: 0x5678...
-[... etc]
+网络：以太坊主网
+提交：abc123def456 (audit-march-2024 分支)
+已部署合约：
+- SwapRouter：0x1234...
+- PriceOracle：0x5678...
+[...等等]
 
 ---
 
-PACKAGE READY FOR AUDIT ✓
-Next Step: Share with Trail of Bits assessment team
+包已准备好进行审计 ✓
+下一步：与 Trail of Bits 评估团队分享
 ```
 
 ---
 
-## What You'll Get
+## 您将获得什么
 
-**Review Goals Document**:
-- Security objectives
-- Areas of concern
-- Worst-case scenarios
-- Questions for auditors
+**审查目标文档**：
+- 安全目标
+- 关注领域
+- 最坏情况场景
+- 审计员问题
 
-**Clean Codebase**:
-- Triaged static analysis (or clean report)
-- High test coverage
-- No dead code
-- Clear scope
+**干净的代码库**：
+- 已分类的静态分析（或清洁报告）
+- 高测试覆盖率
+- 无死代码
+- 清晰的范围
 
-**Accessibility Package**:
-- File list with scope
-- Build instructions
-- Frozen commit/branch
-- Boilerplate identified
+**可访问性包**：
+- 带范围的文件列表
+- 构建说明
+- 冻结的提交/分支
+- 识别的样板代码
 
-**Documentation Suite**:
-- Flowcharts and diagrams
-- User stories
-- Architecture docs
-- Actor/privilege map
-- Inline code comments
-- Glossary
-- Video walkthroughs (if created)
+**文档套件**：
+- 流程图和图表
+- 用户故事
+- 架构文档
+- 参与者/权限映射
+- 代码内注释
+- 术语表
+- 视频导览（如果创建）
 
-**Audit Prep Checklist**:
-- [ ] Review goals documented
-- [ ] Static analysis clean/triaged
-- [ ] Test coverage >80%
-- [ ] Dead code removed
-- [ ] Build instructions verified
-- [ ] Stable version frozen
-- [ ] Flowcharts created
-- [ ] User stories documented
-- [ ] Assumptions documented
-- [ ] Actors/privileges listed
-- [ ] Function docs complete
-- [ ] Glossary created
-
----
-
-## Timeline
-
-**2 weeks before audit**:
-- Set review goals
-- Run static analysis
-- Start fixing issues
-
-**1 week before audit**:
-- Increase test coverage
-- Remove dead code
-- Freeze stable version
-- Start documentation
-
-**Few days before audit**:
-- Complete documentation
-- Verify build instructions
-- Create final checklist
-- Send package to auditors
+**审计准备清单**：
+- [ ] 审查目标已记录
+- [ ] 静态分析清洁/已分类
+- [ ] 测试覆盖率 >80%
+- [ ] 死代码已删除
+- [ ] 构建说明已验证
+- [ ] 稳定版本已冻结
+- [ ] 流程图已创建
+- [ ] 用户故事已记录
+- [ ] 假设已记录
+- [ ] 参与者/权限已列出
+- [ ] 函数文档已完成
+- [ ] 术语表已创建
 
 ---
 
-## Ready to Prep
+## 时间表
 
-Let me know when you're ready and I'll help you prepare for your security review!
+**审计前 2 周**：
+- 设定审查目标
+- 运行静态分析
+- 开始修复问题
+
+**审计前 1 周**：
+- 增加测试覆盖率
+- 删除死代码
+- 冻结稳定版本
+- 开始文档
+
+**审计前几天**：
+- 完成文档
+- 验证构建说明
+- 创建最终清单
+- 发送包给审计员
+
+---
+
+## 准备好准备
+
+当我准备好时，我会帮助您准备进行安全审查！

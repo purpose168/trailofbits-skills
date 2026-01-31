@@ -1,7 +1,7 @@
 {
   "name": "building-secure-contracts",
   "version": "1.0.0",
-  "description": "Comprehensive smart contract security toolkit based on Trail of Bits' Building Secure Contracts framework. Includes vulnerability scanners for 6 blockchains and 5 development guideline assistants.",
+  "description": "基于 Trail of Bits 安全合约构建框架的综合智能合约安全工具包。包含针对 6 条区块链的漏洞扫描器和 5 个开发指南助手。",
   "author": {
     "name": "Omar Inuwa",
     "email": "opensource@trailofbits.com",

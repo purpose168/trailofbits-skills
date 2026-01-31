@@ -1,161 +1,166 @@
 ---
 name: secure-workflow-guide
-description: Guide you through Trail of Bits' 5-step secure development workflow. Runs Slither scans, checks special features (upgradeability/ERC conformance/token integration), generates visual security diagrams, helps document security properties for fuzzing/verification, and reviews manual security areas. (project, gitignored)
+description: 指导您完成 Trail of Bits 的 5 步安全开发工作流。运行 Slither 扫描、检查特殊功能（可升级性/ERC 合规性/代币集成）、生成视觉安全图表、帮助记录用于模糊测试/验证的安全属性，并审查手动安全区域。（项目，gitignored）
 ---
 
-# Secure Workflow Guide
+# 安全工作流指南
 
-## Purpose
+## 目的
 
-I'll guide you through Trail of Bits' secure development workflow - a 5-step process to enhance smart contract security throughout development.
+我将指导您完成 Trail of Bits 的安全开发工作流 - 一个 5 步流程，以在整个开发过程中增强智能合约安全性。
 
-**Use this**: On every check-in, before deployment, or when you want a security review
-
----
-
-## The 5-Step Workflow
-
-I'll guide you through a comprehensive security workflow covering:
-
-### Step 1: Check for Known Security Issues
-Run Slither with 70+ built-in detectors to find common vulnerabilities:
-- Parse findings by severity
-- Explain each issue with file references
-- Recommend fixes
-- Help triage false positives
-
-**Goal**: Clean Slither report or documented triages
-
-### Step 2: Check Special Features
-Detect and validate applicable features:
-- **Upgradeability**: slither-check-upgradeability (17 upgrade risks)
-- **ERC conformance**: slither-check-erc (6 common specs)
-- **Token integration**: Recommend token-integration-analyzer skill
-- **Security properties**: slither-prop for ERC20
-
-**Note**: Only runs checks that apply to your codebase
-
-### Step 3: Visual Security Inspection
-Generate 3 security diagrams:
-- **Inheritance graph**: Identify shadowing and C3 linearization issues
-- **Function summary**: Show visibility and access controls
-- **Variables and authorization**: Map who can write to state variables
-
-Review each diagram for security concerns
-
-### Step 4: Document Security Properties
-Help document critical security properties:
-- State machine transitions and invariants
-- Access control requirements
-- Arithmetic constraints and precision
-- External interaction safety
-- Standards conformance
-
-Then set up testing:
-- **Echidna**: Property-based fuzzing with invariants
-- **Manticore**: Formal verification with symbolic execution
-- **Custom Slither checks**: Project-specific business logic
-
-**Note**: Most important activity for security
-
-### Step 5: Manual Review Areas
-Analyze areas automated tools miss:
-- **Privacy**: On-chain secrets, commit-reveal needs
-- **Front-running**: Slippage protection, ordering risks, MEV
-- **Cryptography**: Weak randomness, signature issues, hash collisions
-- **DeFi interactions**: Oracle manipulation, flash loans, protocol assumptions
-
-Search codebase for these patterns and flag risks
-
-For detailed instructions, commands, and explanations for each step, see [WORKFLOW_STEPS.md](resources/WORKFLOW_STEPS.md).
+**使用此技能**：每次提交、部署前，或当您想要安全审查时
 
 ---
 
-## How I Work
+## 5 步工作流
 
-When invoked, I will:
+我将指导您完成涵盖以下内容的综合安全工作流：
 
-1. **Explore your codebase** to understand structure
-2. **Run Step 1**: Slither security scan
-3. **Detect and run Step 2**: Special feature checks (only what applies)
-4. **Generate Step 3**: Visual security diagrams
-5. **Guide Step 4**: Security property documentation
-6. **Analyze Step 5**: Manual review areas
-7. **Provide action plan**: Prioritized fixes and next steps
+### 第1步：检查已知安全问题
 
-I'll adapt based on:
-- What tools you have installed
-- What's applicable to your project
-- Where you are in development
+运行包含 70+ 内置检测器的 Slither 以发现常见漏洞：
+- 按严重性解析发现
+- 解释每个问题并提供文件引用
+- 推荐修复
+- 帮助分类误报
 
----
+**目标**：干净的 Slither 报告或已记录的分类
 
-## Rationalizations (Do Not Skip)
+### 第2步：检查特殊功能
 
-| Rationalization | Why It's Wrong | Required Action |
-|-----------------|----------------|-----------------|
-| "Slither not available, I'll check manually" | Manual checking misses 70+ detector patterns | Install and run Slither, or document why it's blocked |
-| "Can't generate diagrams, I'll describe the architecture" | Descriptions aren't visual - diagrams reveal patterns text misses | Execute slither --print commands, generate actual visual outputs |
-| "No upgrades detected, skip upgradeability checks" | Proxies and upgrades are often implicit or planned | Verify with codebase search before skipping Step 2 checks |
-| "Not a token, skip ERC checks" | Tokens can be integrated without obvious ERC inheritance | Check for token interactions, transfers, balances before skipping |
-| "Can't set up Echidna now, suggesting it for later" | Property-based testing is Step 4, not optional | Document properties now, set up fuzzing infrastructure |
-| "No DeFi interactions, skip oracle/flash loan checks" | DeFi patterns appear in unexpected places (price feeds, external calls) | Complete Step 5 manual review, search codebase for patterns |
-| "This step doesn't apply to my project" | "Not applicable" without verification = missed vulnerabilities | Verify with explicit codebase search before declaring N/A |
-| "I'll provide generic security advice instead of running workflow" | Generic advice isn't actionable, workflow finds specific issues | Execute all 5 steps, generate project-specific findings with file:line references |
+检测并验证适用功能：
+- **可升级性**：slither-check-upgradeability（17 个升级风险）
+- **ERC 合规性**：slither-check-erc（6 个常见规范）
+- **代币集成**：推荐 token-integration-analyzer 技能
+- **安全属性**：slither-prop 用于 ERC20
 
----
+**注意**：只运行适用于您的代码库的检查
 
-## Example Output
+### 第3步：视觉安全检查
 
-When I complete the workflow, you'll get a comprehensive security report covering:
+生成 3 个安全图表：
+- **继承图**：识别遮蔽和 C3 线性化问题
+- **函数摘要**：显示可见性和访问控制
+- **变量和授权**：映射谁可以写入状态变量
 
-- **Step 1**: Slither findings with severity, file references, and fix recommendations
-- **Step 2**: Special feature validation results (upgradeability, ERC conformance, etc.)
-- **Step 3**: Visual diagrams analyzing inheritance, functions, and state variable authorization
-- **Step 4**: Documented security properties and testing setup (Echidna/Manticore)
-- **Step 5**: Manual review findings (privacy, front-running, cryptography, DeFi risks)
-- **Action plan**: Critical/high/medium priority tasks with effort estimates
-- **Workflow checklist**: Progress on all 5 steps
+审查每个图表的安全问题
 
-For a complete example workflow report, see [EXAMPLE_REPORT.md](resources/EXAMPLE_REPORT.md).
+### 第4步：记录安全属性
 
----
+帮助记录关键安全属性：
+- 状态机转换和不变量
+- 访问控制要求
+- 算术约束和精度
+- 外部交互安全性
+- 标准合规性
 
-## What You'll Get
+然后设置测试：
+- **Echidna**：带有不变量的基于属性的模糊测试
+- **Manticore**：带有符号执行的形式验证
+- **自定义 Slither 检查**：项目特定的业务逻辑
 
-**Security Report**:
-- Slither findings with severity and fixes
-- Special feature validation results
-- Visual diagrams (PNG/PDF)
-- Manual review findings
+**注意**：对安全来说最重要的活动
 
-**Action Plan**:
-- [ ] Critical issues to fix immediately
-- [ ] Security properties to document
-- [ ] Testing to set up (Echidna/Manticore)
-- [ ] Manual areas to review
+### 第5步：手动审查区域
 
-**Workflow Checklist**:
-- [ ] Clean Slither report
-- [ ] Special features validated
-- [ ] Visual inspection complete
-- [ ] Properties documented
-- [ ] Manual review done
+分析自动化工具遗漏的区域：
+- **隐私**：链上秘密、提交-揭示需求
+- **前置运行**：滑点保护、排序风险、MEV
+- **密码学**：弱随机性、签名问题、哈希碰撞
+- **DeFi 交互**：预言机操纵、闪电贷、协议假设
+
+在代码库中搜索这些模式并标记风险
+
+有关每个步骤的详细说明、命令和解释，请参见 [WORKFLOW_STEPS.md](resources/WORKFLOW_STEPS.md)。
 
 ---
 
-## Getting Help
+## 我如何工作
 
-**Trail of Bits Resources**:
-- Office Hours: Every Tuesday ([schedule](https://meetings.hubspot.com/trailofbits/office-hours))
-- Empire Hacking Slack: #crytic and #ethereum channels
+调用时，我将：
 
-**Other Security**:
-- Remember: Security is about more than smart contracts
-- Off-chain security (owner keys, infrastructure) equally critical
+1. **探索您的代码库**以了解结构
+2. **运行第1步**：Slither 安全扫描
+3. **检测并运行第2步**：特殊功能检查（仅适用内容）
+4. **生成第3步**：视觉安全图表
+5. **指导第4步**：安全属性文档
+6. **分析第5步**：手动审查区域
+7. **提供操作计划**：优先修复和下一步
+
+我将根据以下内容进行调整：
+- 您安装了什么工具
+- 什么适用于您的项目
+- 您在开发中的位置
 
 ---
 
-## Ready to Start
+## 合理化（不要跳过）
 
-Let me know when you're ready and I'll run through the workflow with your codebase!
+| 合理化 | 为什么它是错误的 | 必需的操作 |
+|--------|------------------|------------|
+| "Slither 不可用，我会手动检查" | 手动检查会遗漏 70+ 检测器模式 | 安装并运行 Slither，或记录为什么被阻止 |
+| "无法生成图表，我会描述架构" | 描述不是视觉的 - 图表揭示文本遗漏的模式 | 执行 slither --print 命令，生成实际的视觉输出 |
+| "未检测到升级，跳过可升级性检查" | 代理和升级通常是隐式的或计划的 | 在跳过第2步检查之前用代码库搜索验证 |
+| "不是代币，跳过 ERC 检查" | 代币可以在没有明显 ERC 继承的情况下集成 | 在跳过之前检查代币交互、转移、余额 |
+| "现在无法设置 Echidna，建议以后再说" | 属性测试是第4步，不是可选的 | 立即记录属性，设置模糊测试基础设施 |
+| "没有 DeFi 交互，跳过预言机/闪电贷检查" | DeFi 模式出现在意想不到的地方（价格提要、外部调用） | 完成第5步手动审查，在代码库中搜索模式 |
+| "此步骤不适用于我的项目" | 未经验证的"不适用" = 遗漏的漏洞 | 在声明 N/A 之前用显式代码库搜索验证 |
+| "我会提供通用的安全建议而不是运行工作流" | 通用建议不可操作，工作流发现特定问题 | 执行所有5步，生成项目特定的发现，带有文件:行引用 |
+
+---
+
+## 示例输出
+
+当我完成工作流时，您将获得涵盖以下内容的综合安全报告：
+
+- **第1步**：Slither 发现，包含严重性、文件引用和修复建议
+- **第2步**：特殊功能验证结果（可升级性、ERC 合规性等）
+- **第3步**：分析继承、函数和状态变量授权的视觉图表
+- **第4步**：记录的安全属性和测试设置（Echidna/Manticore）
+- **第5步**：手动审查发现（隐私、前置运行、密码学、DeFi 风险）
+- **操作计划**：关键/高/中等优先级的任务，包含工作量估算
+- **工作流清单**：所有5步的进度
+
+有关完整的工作流示例报告，请参见 [EXAMPLE_REPORT.md](resources/EXAMPLE_REPORT.md)。
+
+---
+
+## 您将获得什么
+
+**安全报告**：
+- Slither 发现，包含严重性和修复
+- 特殊功能验证结果
+- 视觉图表（PNG/PDF）
+- 手动审查发现
+
+**操作计划**：
+- [ ] 立即修复的关键问题
+- [ ] 要记录的安全属性
+- [ ] 要设置的测试（Echidna/Manticore）
+- [ ] 要手动审查的区域
+
+**工作流清单**：
+- [ ] 干净的 Slither 报告
+- [ ] 特殊功能已验证
+- [ ] 视觉检查完成
+- [ ] 属性已记录
+- [ ] 手动审查完成
+
+---
+
+## 获得帮助
+
+**Trail of Bits 资源**：
+- 办公时间：每个星期二（[日程](https://meetings.hubspot.com/trailofbits/office-hours)）
+- Empire Hacking Slack：#crytic 和 #ethereum 频道
+
+**其他安全**：
+- 记住：安全不仅仅是智能合约
+- 链下安全（所有者密钥、基础设施）同样关键
+
+---
+
+## 准备好开始
+
+当我准备好时，我会用您的代码库运行工作流！

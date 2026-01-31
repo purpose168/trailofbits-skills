@@ -1,18 +1,18 @@
-name: Trophy Case Submission
-description: Found a bug using one of our skills? Add it to the trophy case!
-title: "[Trophy] "
+name: 奖杯案例提交
+description: 使用我们的技能发现了漏洞？将其添加到奖杯案例中！
+title: "[奖杯] "
 labels: ["trophy-case"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for sharing your find! We love seeing these skills help discover real bugs.
+        感谢分享你的发现！我们很高兴看到这些技能帮助发现了真正的漏洞。
 
   - type: input
     id: bug-link
     attributes:
-      label: Bug Link
-      description: Link to the bug report, PR, advisory, or writeup
+      label: 漏洞链接
+      description: 漏洞报告、PR、公告或文章的链接
       placeholder: https://github.com/org/repo/issues/123
     validations:
       required: true
@@ -20,8 +20,8 @@ body:
   - type: input
     id: skill
     attributes:
-      label: Skill Used
-      description: Which skill helped you find it?
+      label: 使用的技能
+      description: 哪个技能帮助你发现了它？
       placeholder: constant-time-analysis
     validations:
       required: true
@@ -29,14 +29,14 @@ body:
   - type: input
     id: title
     attributes:
-      label: Bug Title
-      description: Short description of the vulnerability (this will be the link text in the trophy case table)
-      placeholder: Timing side-channel in ECDSA verification
+      label: 漏洞标题
+      description: 漏洞的简短描述（这将成为奖杯案例表格中的链接文本）
+      placeholder: ECDSA 验证中的时序侧信道攻击
     validations:
       required: true
 
   - type: textarea
     id: context
     attributes:
-      label: Additional Context (optional)
-      description: Anything else you'd like to share about the find?
+      label: 额外上下文（可选）
+      description: 关于这个发现，你还想分享什么其他内容？

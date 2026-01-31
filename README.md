@@ -1,117 +1,117 @@
-# Trail of Bits Skills Marketplace
+# Trail of Bits 技能市场
 
-A Claude Code plugin marketplace from Trail of Bits providing skills to enhance AI-assisted security analysis, testing, and development workflows.
+这是来自 Trail of Bits 的 Claude Code 插件市场，提供了一系列技能来增强 AI 辅助安全分析、测试和开发工作流。
 
-## Installation
+## 安装
 
-### Add the Marketplace
+### 添加市场
 
 ```
 /plugin marketplace add trailofbits/skills
 ```
 
-### Browse and Install Plugins
+### 浏览和安装插件
 
 ```
 /plugin menu
 ```
 
-### Local Development
+### 本地开发
 
-To add the marketplace locally (e.g., for testing or development), navigate to the **parent directory** of this repository:
+要在本地添加市场（例如用于测试或开发），请导航到此仓库的**父目录**：
 
 ```
-cd /path/to/parent  # e.g., if repo is at ~/projects/skills, be in ~/projects
+cd /path/to/parent  # 例如，如果仓库位于 ~/projects/skills，则应在 ~/projects
 /plugins marketplace add ./skills
 ```
 
-## Available Plugins
+## 可用插件
 
-### Smart Contract Security
+### 智能合约安全
 
-| Plugin | Description |
-|--------|-------------|
-| [building-secure-contracts](plugins/building-secure-contracts/) | Smart contract security toolkit with vulnerability scanners for 6 blockchains |
-| [entry-point-analyzer](plugins/entry-point-analyzer/) | Identify state-changing entry points in smart contracts for security auditing |
+| 插件 | 描述 |
+|------|------|
+| [building-secure-contracts](plugins/building-secure-contracts/) | 智能合约安全工具包，包含针对 6 条区块链的漏洞扫描器 |
+| [entry-point-analyzer](plugins/entry-point-analyzer/) | 识别智能合约中会改变状态的入口点，用于安全审计 |
 
-### Code Auditing
+### 代码审计
 
-| Plugin | Description |
-|--------|-------------|
-| [audit-context-building](plugins/audit-context-building/) | Build deep architectural context through ultra-granular code analysis |
-| [burpsuite-project-parser](plugins/burpsuite-project-parser/) | Search and extract data from Burp Suite project files |
-| [differential-review](plugins/differential-review/) | Security-focused differential review of code changes with git history analysis |
-| [semgrep-rule-creator](plugins/semgrep-rule-creator/) | Create and refine Semgrep rules for custom vulnerability detection |
-| [semgrep-rule-variant-creator](plugins/semgrep-rule-variant-creator/) | Port existing Semgrep rules to new target languages with test-driven validation |
-| [sharp-edges](plugins/sharp-edges/) | Identify error-prone APIs, dangerous configurations, and footgun designs |
-| [static-analysis](plugins/static-analysis/) | Static analysis toolkit with CodeQL, Semgrep, and SARIF parsing |
-| [testing-handbook-skills](plugins/testing-handbook-skills/) | Skills from the [Testing Handbook](https://appsec.guide): fuzzers, static analysis, sanitizers, coverage |
-| [variant-analysis](plugins/variant-analysis/) | Find similar vulnerabilities across codebases using pattern-based analysis |
+| 插件 | 描述 |
+|------|------|
+| [audit-context-building](plugins/audit-context-building/) | 通过超细粒度代码分析构建深层架构上下文 |
+| [burpsuite-project-parser](plugins/burpsuite-project-parser/) | 从 Burp Suite 项目文件中搜索和提取数据 |
+| [differential-review](plugins/differential-review/) | 对代码变更进行安全重点的差异审查，包含 git 历史分析 |
+| [semgrep-rule-creator](plugins/semgrep-rule-creator/) | 创建和完善 Semgrep 规则，用于自定义漏洞检测 |
+| [semgrep-rule-variant-creator](plugins/semgrep-rule-variant-creator/) | 使用测试驱动验证将现有 Semgrep 规则移植到新的目标语言 |
+| [sharp-edges](plugins/sharp-edges/) | 识别易出错的 API、危险配置和"脚枪"设计 |
+| [static-analysis](plugins/static-analysis/) | 静态分析工具包，包含 CodeQL、Semgrep 和 SARIF 解析 |
+| [testing-handbook-skills](plugins/testing-handbook-skills/) | 来自[测试手册](https://appsec.guide)的技能：模糊测试、静态分析、清理器、覆盖率 |
+| [variant-analysis](plugins/variant-analysis/) | 使用基于模式分析在代码库中查找类似漏洞 |
 
-### Verification
+### 验证
 
-| Plugin | Description |
-|--------|-------------|
-| [constant-time-analysis](plugins/constant-time-analysis/) | Detect compiler-induced timing side-channels in cryptographic code |
-| [property-based-testing](plugins/property-based-testing/) | Property-based testing guidance for multiple languages and smart contracts |
-| [spec-to-code-compliance](plugins/spec-to-code-compliance/) | Specification-to-code compliance checker for blockchain audits |
+| 插件 | 描述 |
+|------|------|
+| [constant-time-analysis](plugins/constant-time-analysis/) | 检测加密代码中编译器引起的时间侧信道攻击 |
+| [property-based-testing](plugins/property-based-testing/) | 针对多种语言和智能合约的属性测试指南 |
+| [spec-to-code-compliance](plugins/spec-to-code-compliance/) | 区块链审计的规范到代码合规性检查器 |
 
-### Audit Lifecycle
+### 审计生命周期
 
-| Plugin | Description |
-|--------|-------------|
-| [fix-review](plugins/fix-review/) | Verify fix commits address audit findings without introducing bugs |
+| 插件 | 描述 |
+|------|------|
+| [fix-review](plugins/fix-review/) | 验证修复提交是否解决了审计发现，且没有引入新错误 |
 
-### Reverse Engineering
+### 逆向工程
 
-| Plugin | Description |
-|--------|-------------|
-| [dwarf-expert](plugins/dwarf-expert/) | Interact with and understand the DWARF debugging format |
+| 插件 | 描述 |
+|------|------|
+| [dwarf-expert](plugins/dwarf-expert/) | 与 DWARF 调试格式交互并理解它 |
 
-### Mobile Security
+### 移动安全
 
-| Plugin | Description |
-|--------|-------------|
-| [firebase-apk-scanner](plugins/firebase-apk-scanner/) | Scan Android APKs for Firebase security misconfigurations |
+| 插件 | 描述 |
+|------|------|
+| [firebase-apk-scanner](plugins/firebase-apk-scanner/) | 扫描 Android APK 中的 Firebase 安全配置错误 |
 
-### Development
+### 开发
 
-| Plugin | Description |
-|--------|-------------|
-| [ask-questions-if-underspecified](plugins/ask-questions-if-underspecified/) | Clarify requirements before implementing |
-| [modern-python](plugins/modern-python/) | Modern Python tooling and best practices with uv, ruff, and pytest |
+| 插件 | 描述 |
+|------|------|
+| [ask-questions-if-underspecified](plugins/ask-questions-if-underspecified/) | 在实现前澄清需求 |
+| [modern-python](plugins/modern-python/) | 现代 Python 工具和最佳实践，使用 uv、ruff 和 pytest |
 
-### Team Management
+### 团队管理
 
-| Plugin | Description |
-|--------|-------------|
-| [culture-index](plugins/culture-index/) | Interpret Culture Index survey results for individuals and teams |
+| 插件 | 描述 |
+|------|------|
+| [culture-index](plugins/culture-index/) | 解释个人和团队的 Culture Index 调查结果 |
 
-### Tooling
+### 工具
 
-| Plugin | Description |
-|--------|-------------|
-| [claude-in-chrome-troubleshooting](plugins/claude-in-chrome-troubleshooting/) | Diagnose and fix Claude in Chrome MCP extension connectivity issues |
+| 插件 | 描述 |
+|------|------|
+| [claude-in-chrome-troubleshooting](plugins/claude-in-chrome-troubleshooting/) | 诊断和修复 Chrome 中 Claude MCP 扩展连接问题 |
 
-## Trophy Case
+## 奖杯案例
 
-Bugs discovered using Trail of Bits Skills. Found something? [Let us know!](https://github.com/trailofbits/skills/issues/new?template=trophy-case.yml)
+使用 Trail of Bits 技能发现的漏洞。发现了什么？[告诉我们！](https://github.com/trailofbits/skills/issues/new?template=trophy-case.yml)
 
-When reporting bugs you've found, feel free to mention:
-> Found using [Trail of Bits Skills](https://github.com/trailofbits/skills)
+报告你发现的漏洞时，可以随意提及：
+> 使用 [Trail of Bits 技能](https://github.com/trailofbits/skills) 发现
 
-| Skill | Bug |
-|-------|-----|
-| constant-time-analysis | [Timing side-channel in ML-DSA signing](https://github.com/RustCrypto/signatures/pull/1144) |
+| 技能 | 漏洞 |
+|------|------|
+| constant-time-analysis | [ML-DSA 签名中的时序侧信道攻击](https://github.com/RustCrypto/signatures/pull/1144) |
 
-## Contributing
+## 贡献
 
-We welcome contributions! Please see [CLAUDE.md](CLAUDE.md) for skill authoring guidelines.
+我们欢迎贡献！请参阅 [CLAUDE.md](CLAUDE.md) 了解技能创作指南。
 
-## License
+## 许可证
 
-This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+本作品采用[知识共享署名-相同方式共享 4.0 国际许可证](https://creativecommons.org/licenses/by-sa/4.0/)授权。
 
-## About Trail of Bits
+## 关于 Trail of Bits
 
-[Trail of Bits](https://www.trailofbits.com/) is a security research and consulting firm.
+[Trail of Bits](https://www.trailofbits.com/) 是一家安全研究和咨询公司。

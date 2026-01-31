@@ -1,23 +1,23 @@
-# Ask Questions If Underspecified
+# 如果需求不明确则提出问题
 
-Ask the minimum set of clarifying questions needed to avoid wrong work.  
+提出最少的问题来澄清需求，避免做无用功。
 
-**Author:** Kevin Valerio
+**作者：** Kevin Valerio
 
-## When to Use
+## 何时使用
 
-Use this skill when:
-- The request has multiple plausible interpretations
-- Success criteria, scope, constraints, or environment details are unclear
-- Starting implementation without clarification risks doing the wrong work
+在以下情况下使用此技能：
+- 请求有多种合理的解释
+- 成功标准、范围、约束或环境细节不明确
+- 不澄清就开始实施可能会导致做错工作
 
-## What It Does
+## 它做什么
 
-- Asks 1–5 must-have questions in a scannable, answerable format (multiple choice + defaults)
-- Pauses before acting until required answers are provided (unless the user approves proceeding on stated assumptions)
-- Restates confirmed requirements before starting work
+- 以可扫描、可回答的格式（多选 + 默认值）提出 1-5 个必须回答的问题
+- 在提供所需答案之前暂停行动（除非用户批准按所述假设继续）
+- 在开始工作前重新陈述确认的需求
 
-## Installation
+## 安装
 
 ```
 /plugin install trailofbits/skills/plugins/ask-questions-if-underspecified
